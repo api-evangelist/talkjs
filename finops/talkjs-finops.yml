@@ -1,0 +1,90 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: TalkJS
+providerId: talkjs
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: true
+tags:
+- Chat
+- Messaging
+- Communication
+- SDK
+- Webhooks
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of TalkJS spend. TalkJS bills a flat monthly subscription fee per
+  plan (Basic, Growth, Enterprise) that includes a block of monthly active
+  users (MAU), plus a per-MAU overage charge above the included block. Cost is
+  driven primarily by MAU - the count of unique users who load a chat in a
+  month - so spend scales with active user growth rather than message or API
+  call volume.
+notes: >-
+  Plan fees and per-MAU overage rates are subject to change; verify against the
+  TalkJS pricing page during reconciliation.
+sources:
+- https://talkjs.com/pricing/
+- https://talkjs.com/docs/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: TalkJS
+serviceCategory: Developer Tools and Communication
+billingModel:
+  pricingCategory: Subscription-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+  - Adjustment
+focusColumns:
+  ServiceName: TalkJS Chat API
+  ServiceCategory: Developer Tools and Communication
+  ProviderName: TalkJS
+  PublisherName: TalkJS
+  InvoiceIssuerName: TalkJS
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Subscription-Based
+meters:
+- name: plan_subscription
+  description: Flat monthly plan fee (Basic / Growth / Enterprise) including a block of MAU.
+  unit: months
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+- name: monthly_active_users
+  description: Unique users who loaded a chat in the billing month; included up to the plan block.
+  unit: users
+  aggregation: max
+  dimensions:
+  - account
+  - plan
+- name: mau_overage
+  description: Monthly active users above the plan's included block, billed per additional MAU.
+  unit: users
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+principles:
+- name: Visibility
+  description: Track MAU against the plan's included block; watch overage accrual as active users grow.
+- name: Allocation
+  description: Attribute MAU to product surfaces or tenants where chat is embedded to map cost to teams.
+- name: Optimization
+  description: Right-size the plan so the flat block matches steady-state MAU; avoid loading the chat UI for users who will not engage.
+- name: Accountability
+  description: Review monthly MAU and overage against budget; reassess plan tier as the user base scales.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,95 @@
+aid: talkjs
+name: TalkJS
+review:
+  question: Does TalkJS expose a documented public WebSocket or streaming API?
+  answer: false
+  date: '2026-06-20'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was created. TalkJS does not document a public
+    WebSocket, Server-Sent Events, or other streaming transport in its REST
+    API reference or webhooks documentation. Real-time delivery to clients is
+    handled internally by the TalkJS JavaScript SDK / Chat UI, which is not a
+    documented public message-based API surface. Server-side event delivery is
+    provided via outbound HTTP webhooks, which are request/response and out of
+    AsyncAPI scope here.
+findings:
+  summary: |
+    TalkJS does not publish a documented public WebSocket or streaming API.
+    The public server-side surface is a REST API under
+    https://api.talkjs.com/v1/{appId} for users, conversations, participants,
+    messages, and message import, authenticated with a Bearer token (secret
+    key or short-lived JWT with admin claims). Outbound events are delivered
+    server-to-server via HTTP webhooks. The browser/mobile SDK maintains its
+    own realtime connection to render the chat UI, but that connection is not
+    a documented, independently consumable public API.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.talkjs.com/v1/{appId}
+      documented: true
+    - protocol: Webhooks
+      scheme: https
+      note: Outbound HTTP POST event delivery with an id/type/createdAt/data envelope to configured endpoints.
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No public WebSocket endpoint is documented in the REST API reference or webhooks docs; realtime is handled inside the proprietary SDK.
+  endpointsConfirmedRest:
+    - PUT    https://api.talkjs.com/v1/{appId}/users/{userId}
+    - PUT    https://api.talkjs.com/v1/{appId}/users
+    - GET    https://api.talkjs.com/v1/{appId}/users/{userId}
+    - GET    https://api.talkjs.com/v1/{appId}/users
+    - GET    https://api.talkjs.com/v1/{appId}/users/{userId}/conversations
+    - GET    https://api.talkjs.com/v1/{appId}/users/{userId}/presence
+    - PUT    https://api.talkjs.com/v1/{appId}/users/{userId}/presence
+    - GET    https://api.talkjs.com/v1/{appId}/conversations
+    - GET    https://api.talkjs.com/v1/{appId}/conversations/{conversationId}
+    - PUT    https://api.talkjs.com/v1/{appId}/conversations/{conversationId}
+    - DELETE https://api.talkjs.com/v1/{appId}/conversations/{conversationId}
+    - PATCH  https://api.talkjs.com/v1/{appId}/users/{userId}/conversations/{conversationId}
+    - PUT    https://api.talkjs.com/v1/{appId}/conversations/{conversationId}/participants/{userId}
+    - DELETE https://api.talkjs.com/v1/{appId}/conversations/{conversationId}/participants/{userId}
+    - GET    https://api.talkjs.com/v1/{appId}/conversations/{conversationId}/messages
+    - POST   https://api.talkjs.com/v1/{appId}/conversations/{conversationId}/messages
+    - GET    https://api.talkjs.com/v1/{appId}/conversations/{conversationId}/messages/{messageId}
+    - PUT    https://api.talkjs.com/v1/{appId}/conversations/{conversationId}/messages/{messageId}
+    - DELETE https://api.talkjs.com/v1/{appId}/conversations/{conversationId}/messages/{messageId}
+    - PUT    https://api.talkjs.com/v1/{appId}/conversations/{conversationId}/messages/{messageId}/reactions/{emoji}/{userId}
+    - DELETE https://api.talkjs.com/v1/{appId}/conversations/{conversationId}/messages/{messageId}/reactions/{emoji}/{userId}
+    - POST   https://api.talkjs.com/v1/{appId}/import/conversations/{conversationId}/messages
+    - POST   https://api.talkjs.com/v1/{appId}/batch
+  webhookEvents:
+    - user.created
+    - user.updated
+    - message.sent
+    - message.read
+    - message.updated
+    - message.deleted
+    - conversation.deleted
+    - notification.triggered
+    - notification.sent
+    - notification.delivered
+    - notification.bounced
+    - notification.opened
+    - notification.link.clicked
+sources:
+  - url: https://talkjs.com/docs/Reference/REST_API/
+    type: APIReference
+    note: Lists REST base URL https://api.talkjs.com/v1/{appId}, Bearer auth, and the resource endpoints.
+  - url: https://talkjs.com/docs/Reference/Webhooks/
+    type: Documentation
+    note: Documents webhook event types and the id/type/createdAt/data payload envelope; no WebSocket mentioned.
+  - url: https://talkjs.com/docs/Reference/REST_API/Importing_Messages/
+    type: Documentation
+    note: Documents the import resource for messages with original timestamps.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No documented public message-based / WebSocket surface exists, so no
+    AsyncAPI document was authored. Webhooks (request/response HTTP delivery)
+    are captured in apis.yml as a dedicated sub-API and enumerated in this
+    review.

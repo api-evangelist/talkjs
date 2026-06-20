@@ -1,0 +1,348 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TalkJS REST API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create or update a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.talkjs.com/v1/{{appId}}/users/{{userId}}",
+            "body": {
+              "type": "json",
+              "data": "{\"name\": \"<string>\", \"email\": [\"<string>\"], \"photoUrl\": \"<string>\", \"role\": \"<string>\", \"welcomeMessage\": \"<string>\", \"custom\": {}}"
+            }
+          },
+          "docs": "Create or update a user"
+        },
+        {
+          "info": {
+            "name": "Batch create or update users",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.talkjs.com/v1/{{appId}}/users",
+            "body": {
+              "type": "json",
+              "data": "{\"<userId>\": {\"name\": \"<string>\", \"role\": \"<string>\"}}"
+            }
+          },
+          "docs": "Batch create or update users"
+        },
+        {
+          "info": {
+            "name": "Retrieve a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.talkjs.com/v1/{{appId}}/users/{{userId}}"
+          },
+          "docs": "Retrieve a user"
+        },
+        {
+          "info": {
+            "name": "List users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.talkjs.com/v1/{{appId}}/users"
+          },
+          "docs": "List users"
+        },
+        {
+          "info": {
+            "name": "List a user's conversations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.talkjs.com/v1/{{appId}}/users/{{userId}}/conversations"
+          },
+          "docs": "List a user's conversations"
+        },
+        {
+          "info": {
+            "name": "Get user presence",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.talkjs.com/v1/{{appId}}/users/{{userId}}/presence"
+          },
+          "docs": "Get user presence"
+        },
+        {
+          "info": {
+            "name": "Set user presence",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.talkjs.com/v1/{{appId}}/users/{{userId}}/presence",
+            "body": {
+              "type": "json",
+              "data": "{\"visible\": true, \"availability\": \"online\"}"
+            }
+          },
+          "docs": "Set user presence"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Conversations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List conversations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.talkjs.com/v1/{{appId}}/conversations"
+          },
+          "docs": "List conversations"
+        },
+        {
+          "info": {
+            "name": "Retrieve a conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.talkjs.com/v1/{{appId}}/conversations/{{conversationId}}"
+          },
+          "docs": "Retrieve a conversation"
+        },
+        {
+          "info": {
+            "name": "Create or update a conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.talkjs.com/v1/{{appId}}/conversations/{{conversationId}}",
+            "body": {
+              "type": "json",
+              "data": "{\"subject\": \"<string>\", \"photoUrl\": \"<string>\", \"welcomeMessages\": [\"<string>\"], \"custom\": {}, \"participants\": [\"<userId>\"]}"
+            }
+          },
+          "docs": "Create or update a conversation"
+        },
+        {
+          "info": {
+            "name": "Delete a conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.talkjs.com/v1/{{appId}}/conversations/{{conversationId}}"
+          },
+          "docs": "Delete a conversation"
+        },
+        {
+          "info": {
+            "name": "Mark a conversation read or unread",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.talkjs.com/v1/{{appId}}/users/{{userId}}/conversations/{{conversationId}}",
+            "body": {
+              "type": "json",
+              "data": "{\"readUntil\": \"sent\"}"
+            }
+          },
+          "docs": "Mark a conversation read or unread"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Participants",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add or update a participant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.talkjs.com/v1/{{appId}}/conversations/{{conversationId}}/participants/{{userId}}",
+            "body": {
+              "type": "json",
+              "data": "{\"access\": \"ReadWrite\", \"notify\": true}"
+            }
+          },
+          "docs": "Add or update a participant"
+        },
+        {
+          "info": {
+            "name": "Remove a participant",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.talkjs.com/v1/{{appId}}/conversations/{{conversationId}}/participants/{{userId}}"
+          },
+          "docs": "Remove a participant"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.talkjs.com/v1/{{appId}}/conversations/{{conversationId}}/messages"
+          },
+          "docs": "List messages"
+        },
+        {
+          "info": {
+            "name": "Send messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.talkjs.com/v1/{{appId}}/conversations/{{conversationId}}/messages",
+            "body": {
+              "type": "json",
+              "data": "[{\"type\": \"UserMessage\", \"text\": \"<string>\", \"sender\": \"<userId>\", \"custom\": {}}]"
+            }
+          },
+          "docs": "Send messages"
+        },
+        {
+          "info": {
+            "name": "Retrieve a message",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.talkjs.com/v1/{{appId}}/conversations/{{conversationId}}/messages/{{messageId}}"
+          },
+          "docs": "Retrieve a message"
+        },
+        {
+          "info": {
+            "name": "Edit a message",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.talkjs.com/v1/{{appId}}/conversations/{{conversationId}}/messages/{{messageId}}",
+            "body": {
+              "type": "json",
+              "data": "{\"text\": \"<string>\", \"custom\": {}}"
+            }
+          },
+          "docs": "Edit a message"
+        },
+        {
+          "info": {
+            "name": "Delete a message",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.talkjs.com/v1/{{appId}}/conversations/{{conversationId}}/messages/{{messageId}}"
+          },
+          "docs": "Delete a message"
+        },
+        {
+          "info": {
+            "name": "Add an emoji reaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.talkjs.com/v1/{{appId}}/conversations/{{conversationId}}/messages/{{messageId}}/reactions/{{emoji}}/{{userId}}"
+          },
+          "docs": "Add an emoji reaction"
+        },
+        {
+          "info": {
+            "name": "Remove an emoji reaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.talkjs.com/v1/{{appId}}/conversations/{{conversationId}}/messages/{{messageId}}/reactions/{{emoji}}/{{userId}}"
+          },
+          "docs": "Remove an emoji reaction"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Import",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Import messages with timestamps",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.talkjs.com/v1/{{appId}}/import/conversations/{{conversationId}}/messages",
+            "body": {
+              "type": "json",
+              "data": "[{\"type\": \"UserMessage\", \"text\": \"<string>\", \"sender\": \"<userId>\", \"createdAt\": 0}]"
+            }
+          },
+          "docs": "Import messages with timestamps"
+        },
+        {
+          "info": {
+            "name": "Execute a batch of operations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.talkjs.com/v1/{{appId}}/batch",
+            "body": {
+              "type": "json",
+              "data": "[]"
+            }
+          },
+          "docs": "Execute a batch of operations"
+        }
+      ]
+    }
+  ]
+}

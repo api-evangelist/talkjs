@@ -1,0 +1,140 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: TalkJS
+providerId: talkjs
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: true
+tags:
+- Chat
+- Messaging
+- Communication
+- SDK
+- Webhooks
+- Plans
+description: >-
+  TalkJS prices on monthly active users (MAU) across three plans - Basic,
+  Growth, and Enterprise - each with a flat monthly fee that includes a block
+  of MAUs plus a per-MAU overage rate. All features are free to use in
+  development mode; billing applies in production. Plans differ by support
+  level, included features (chatbot UI, email/SMS/push notifications, analytics,
+  translation, message search), webhook count, and group chat participant
+  limits.
+notes: >-
+  Prices and MAU allotments as published on the TalkJS pricing page; verify the
+  current numbers on talkjs.com/pricing during reconciliation as they change.
+sources:
+- https://talkjs.com/pricing/
+- https://talkjs.com/docs/
+plans:
+- id: talkjs-basic
+  name: Basic
+  type: subscription
+  description: >-
+    Entry production plan with the core chat UI and REST API, unlimited
+    conversations and messages, group chats up to 100 participants, file
+    transfers, voice messaging, and 1 webhook.
+  entries:
+  - label: Basic Monthly Fee
+    name: basic_fee
+    type: flat
+    metric: subscription
+    limit: 10000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $279 per month (includes 10,000 MAU)
+    userMultiplied: false
+  - label: Additional MAU
+    name: basic_mau_overage
+    type: usage
+    metric: users
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0.04 per additional MAU
+    userMultiplied: true
+  elements:
+  - name: Pre-built Chat UI
+  - name: REST API
+  - name: Group Chat (up to 100)
+  - name: File Transfers
+  - name: Voice Messaging
+  - name: 1 Webhook
+  - name: Basic Support
+- id: talkjs-growth
+  name: Growth
+  type: subscription
+  description: >-
+    Scaling plan with everything in Basic plus priority support, chatbot
+    interface, email/SMS/push notifications, reply-via-email, analytics, custom
+    email domain, real-time translation, message search, domain masking, group
+    chats up to 300 participants, and 3 webhooks.
+  entries:
+  - label: Growth Monthly Fee
+    name: growth_fee
+    type: flat
+    metric: subscription
+    limit: 25000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $569 per month (includes 25,000 MAU)
+    userMultiplied: false
+  - label: Additional MAU
+    name: growth_mau_overage
+    type: usage
+    metric: users
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0.03 per additional MAU
+    userMultiplied: true
+  elements:
+  - name: All Basic Features
+  - name: Priority Support
+  - name: Chatbot Interface
+  - name: Email / SMS / Push Notifications
+  - name: Reply via Email
+  - name: Analytics
+  - name: Custom Email Domain
+  - name: Real-time Translation
+  - name: Message Search
+  - name: Domain Masking
+  - name: Group Chat (up to 300)
+  - name: 3 Webhooks
+- id: talkjs-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Custom plan with everything in Growth plus SLA and performance guarantees,
+    encryption guarantees, roadmap priority, a dedicated Solutions Engineer,
+    on-premise / private cloud and dedicated server options, and customizable
+    group chat participant limits. Contact TalkJS sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: All Growth Features
+  - name: SLA Guarantees
+  - name: Performance Assurances
+  - name: Encryption Guarantees
+  - name: Roadmap Priority
+  - name: Dedicated Solutions Engineer
+  - name: On-premise / Private Cloud
+  - name: Dedicated Servers
+  - name: Custom Group Chat Limits
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

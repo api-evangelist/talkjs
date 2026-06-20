@@ -1,0 +1,845 @@
+{
+  "item": [
+    {
+      "id": "69a6c60e-2969-4432-9bd7-ab2b6b3ff209",
+      "name": "Users",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3d8b4cd8-346e-48fa-9ef1-78e3ccce974e",
+          "name": "Create or update a user",
+          "request": {
+            "name": "Create or update a user",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "{{appId}}",
+                "users",
+                "{{userId}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"email\": [\n    \"<string>\"\n  ],\n  \"photoUrl\": \"<string>\",\n  \"role\": \"<string>\",\n  \"welcomeMessage\": \"<string>\",\n  \"custom\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "c1b75556-fa5f-458b-8ca4-91e723abf065",
+          "name": "Batch create or update users",
+          "request": {
+            "name": "Batch create or update users",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "{{appId}}",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"<userId>\": {\n    \"name\": \"<string>\",\n    \"role\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "3009c4ce-971e-49ea-8240-34079b207994",
+          "name": "Retrieve a user",
+          "request": {
+            "name": "Retrieve a user",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "{{appId}}",
+                "users",
+                "{{userId}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "dcefaf4d-8514-4677-bc86-f49734ea272e",
+          "name": "List users",
+          "request": {
+            "name": "List users",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "{{appId}}",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "feda3021-1c98-4e15-b405-be90bdb854a7",
+          "name": "List a user's conversations",
+          "request": {
+            "name": "List a user's conversations",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "{{appId}}",
+                "users",
+                "{{userId}}",
+                "conversations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "7ee7eed3-0280-452f-9986-2cb301052266",
+          "name": "Get user presence",
+          "request": {
+            "name": "Get user presence",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "{{appId}}",
+                "users",
+                "{{userId}}",
+                "presence"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "c22d89c2-a79b-4715-b99e-9520da967c38",
+          "name": "Set user presence",
+          "request": {
+            "name": "Set user presence",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "{{appId}}",
+                "users",
+                "{{userId}}",
+                "presence"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"visible\": true,\n  \"availability\": \"online\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "55a9ebc1-d98a-4268-96e1-70de77653b40",
+      "name": "Conversations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5c0ff5b9-bdd7-4253-b3ca-8924d9c96bb0",
+          "name": "List conversations",
+          "request": {
+            "name": "List conversations",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "{{appId}}",
+                "conversations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "157bf15e-c714-46f7-997b-93ffd5724439",
+          "name": "Retrieve a conversation",
+          "request": {
+            "name": "Retrieve a conversation",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "{{appId}}",
+                "conversations",
+                "{{conversationId}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "ec306e06-9b05-47e5-abb3-a99524e9d6dd",
+          "name": "Create or update a conversation",
+          "request": {
+            "name": "Create or update a conversation",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "{{appId}}",
+                "conversations",
+                "{{conversationId}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subject\": \"<string>\",\n  \"photoUrl\": \"<string>\",\n  \"welcomeMessages\": [\n    \"<string>\"\n  ],\n  \"custom\": {},\n  \"participants\": [\n    \"<userId>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "798238e3-f0fd-4870-a92a-674210c79021",
+          "name": "Delete a conversation",
+          "request": {
+            "name": "Delete a conversation",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "{{appId}}",
+                "conversations",
+                "{{conversationId}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "19b0269d-7031-45a4-a5fd-6dfc1818bcde",
+          "name": "Mark a conversation read or unread",
+          "request": {
+            "name": "Mark a conversation read or unread",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "{{appId}}",
+                "users",
+                "{{userId}}",
+                "conversations",
+                "{{conversationId}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"readUntil\": \"sent\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "8a86c128-7dab-4556-b206-d10e8ede2255",
+      "name": "Participants",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "79e9877b-8790-40b1-8f81-10cdd3e75c10",
+          "name": "Add or update a participant",
+          "request": {
+            "name": "Add or update a participant",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "{{appId}}",
+                "conversations",
+                "{{conversationId}}",
+                "participants",
+                "{{userId}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"access\": \"ReadWrite\",\n  \"notify\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "d7190545-9a2b-4c7b-bda0-cb2f4ad39424",
+          "name": "Remove a participant",
+          "request": {
+            "name": "Remove a participant",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "{{appId}}",
+                "conversations",
+                "{{conversationId}}",
+                "participants",
+                "{{userId}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "c89e6d8f-fe81-4209-940c-44a885265224",
+      "name": "Messages",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ff8a249f-b9ad-4ea5-8af7-ed830212b1b4",
+          "name": "List messages",
+          "request": {
+            "name": "List messages",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "{{appId}}",
+                "conversations",
+                "{{conversationId}}",
+                "messages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "83347ec7-6d30-4952-b80d-0a0e15044fd2",
+          "name": "Send messages",
+          "request": {
+            "name": "Send messages",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "{{appId}}",
+                "conversations",
+                "{{conversationId}}",
+                "messages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"type\": \"UserMessage\",\n    \"text\": \"<string>\",\n    \"sender\": \"<userId>\",\n    \"custom\": {}\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "a48a4560-c359-4880-af8f-22c75abd48b1",
+          "name": "Retrieve a message",
+          "request": {
+            "name": "Retrieve a message",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "{{appId}}",
+                "conversations",
+                "{{conversationId}}",
+                "messages",
+                "{{messageId}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "4905dc66-ccb2-4bab-96d0-0d7fe50875b5",
+          "name": "Edit a message",
+          "request": {
+            "name": "Edit a message",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "{{appId}}",
+                "conversations",
+                "{{conversationId}}",
+                "messages",
+                "{{messageId}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"custom\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "d6560224-d183-4a7d-8917-79c1605efcd1",
+          "name": "Delete a message",
+          "request": {
+            "name": "Delete a message",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "{{appId}}",
+                "conversations",
+                "{{conversationId}}",
+                "messages",
+                "{{messageId}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "0407c0a0-ef27-4c1e-a2f0-a02c156211f4",
+          "name": "Add an emoji reaction",
+          "request": {
+            "name": "Add an emoji reaction",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "{{appId}}",
+                "conversations",
+                "{{conversationId}}",
+                "messages",
+                "{{messageId}}",
+                "reactions",
+                "{{emoji}}",
+                "{{userId}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "ca249019-c1b3-47e8-964d-e8205602a58d",
+          "name": "Remove an emoji reaction",
+          "request": {
+            "name": "Remove an emoji reaction",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "{{appId}}",
+                "conversations",
+                "{{conversationId}}",
+                "messages",
+                "{{messageId}}",
+                "reactions",
+                "{{emoji}}",
+                "{{userId}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "45c0d3d3-482b-4f2f-915f-1aff09476380",
+      "name": "Import",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f2f5a335-94dd-49b9-a79c-0421277cf89c",
+          "name": "Import messages with timestamps",
+          "request": {
+            "name": "Import messages with timestamps",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "{{appId}}",
+                "import",
+                "conversations",
+                "{{conversationId}}",
+                "messages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"type\": \"UserMessage\",\n    \"text\": \"<string>\",\n    \"sender\": \"<userId>\",\n    \"createdAt\": 0\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "7095fc6b-5dd6-453d-a6e1-33f26f73585f",
+          "name": "Execute a batch of operations",
+          "request": {
+            "name": "Execute a batch of operations",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "{{appId}}",
+                "batch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.talkjs.com",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "YOUR_APP_ID",
+      "key": "appId"
+    },
+    {
+      "type": "string",
+      "value": "YOUR_USER_ID",
+      "key": "userId"
+    },
+    {
+      "type": "string",
+      "value": "YOUR_CONVERSATION_ID",
+      "key": "conversationId"
+    },
+    {
+      "type": "string",
+      "value": "YOUR_MESSAGE_ID",
+      "key": "messageId"
+    },
+    {
+      "type": "string",
+      "value": "thumbsup",
+      "key": "emoji"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "747d0d23-da00-4991-b0b0-ab63cc3bafb8",
+    "name": "TalkJS REST API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The TalkJS REST API for managing users, conversations, participants, and messages, and for importing chat history.\n\nContact Support:\n Name: TalkJS Support\n URL: https://talkjs.com/contact/",
+      "type": "text/plain"
+    }
+  }
+}

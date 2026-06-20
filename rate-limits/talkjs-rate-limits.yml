@@ -1,0 +1,65 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: TalkJS
+providerId: talkjs
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: true
+tags:
+- Chat
+- Messaging
+- Communication
+- SDK
+- Webhooks
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  The TalkJS REST API enforces a burst allowance and a sustained per-second
+  request rate per application. The batch endpoint is limited separately to one
+  batch per second. List endpoints cap page sizes per resource and paginate via
+  a startingAfter cursor. Requests exceeding the limits are throttled and
+  clients should back off and retry.
+notes: >-
+  Values reflect the documented REST API limits; verify against the TalkJS REST
+  API reference during reconciliation as limits may differ by plan.
+sources:
+- https://talkjs.com/docs/Reference/REST_API/
+- https://talkjs.com/pricing/
+responseCodes:
+  throttled: 429
+limits:
+- name: Burst Requests
+  scope: application
+  metric: requests
+  limit: 600 burst
+  notes: Short burst allowance before the sustained rate applies.
+- name: Sustained Requests
+  scope: application
+  metric: requests
+  limit: 9 requests per second
+  notes: Sustained REST API request rate per application.
+- name: Batch Requests
+  scope: application
+  metric: requests
+  limit: 1 batch per second
+  notes: The /batch endpoint is limited separately to one batch per second.
+- name: Conversation List Page Size
+  scope: application
+  metric: items
+  limit: 1-30 per page
+  notes: Listing conversations returns between 1 and 30 items per page.
+- name: User / Message List Page Size
+  scope: application
+  metric: items
+  limit: 1-100 per page
+  notes: Listing users or messages returns between 1 and 100 items per page.
+policies:
+- name: Pagination
+  description: Use the startingAfter cursor parameter to page through large result sets.
+- name: Backoff Strategy
+  description: On 429 responses, clients should slow request rate and retry with exponential backoff.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,142 @@
+aid: talkjs
+url: https://raw.githubusercontent.com/api-evangelist/talkjs/refs/heads/main/apis.yml
+name: TalkJS
+kind: company
+description: TalkJS is a chat API and SDK for adding messaging to web and mobile
+  apps. It pairs a customizable pre-built chat UI (the TalkJS JavaScript SDK and
+  Chat UI) with a server-side REST API at https://api.talkjs.com/v1/{appId} for
+  managing users, conversations, participants, and messages, importing existing
+  chat history, and receiving events via webhooks.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Chat
+- Messaging
+- Communication
+- SDK
+- Webhooks
+created: '2026-06-20'
+modified: '2026-06-20'
+specificationVersion: '0.19'
+apis:
+- aid: talkjs:talkjs-users-api
+  name: TalkJS Users API
+  tags:
+  - Users
+  - Presence
+  - Profiles
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://talkjs.com/docs/Reference/REST_API/Users/
+  baseURL: https://api.talkjs.com/v1/{appId}
+  properties:
+  - url: https://talkjs.com/docs/Reference/REST_API/Users/
+    type: Documentation
+  - url: https://talkjs.com/docs/Reference/REST_API/Users/
+    type: APIReference
+  - url: openapi/talkjs-openapi.yml
+    type: OpenAPI
+  - url: collections/talkjs.postman_collection.json
+    type: PostmanCollection
+  description: Create, update, and retrieve TalkJS users, list users and a user's
+    conversations, and manage per-user presence. Users are timeless resources
+    upserted with PUT and updated PATCH-style with a subset of fields.
+- aid: talkjs:talkjs-conversations-api
+  name: TalkJS Conversations & Participants API
+  tags:
+  - Conversations
+  - Participants
+  - Access
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://talkjs.com/docs/Reference/REST_API/Conversations/
+  baseURL: https://api.talkjs.com/v1/{appId}
+  properties:
+  - url: https://talkjs.com/docs/Reference/REST_API/Conversations/
+    type: Documentation
+  - url: https://talkjs.com/docs/Reference/REST_API/Conversations/
+    type: APIReference
+  - url: openapi/talkjs-openapi.yml
+    type: OpenAPI
+  - url: collections/talkjs.postman_collection.json
+    type: PostmanCollection
+  description: Create, update, list, and delete conversations, and manage their
+    participants - join (PUT), leave (DELETE), and set access (ReadWrite/Read) and
+    notification preferences. Includes marking conversations read/unread per user.
+- aid: talkjs:talkjs-messages-api
+  name: TalkJS Messages API
+  tags:
+  - Messages
+  - Reactions
+  - Replies
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://talkjs.com/docs/Reference/REST_API/Messages/
+  baseURL: https://api.talkjs.com/v1/{appId}
+  properties:
+  - url: https://talkjs.com/docs/Reference/REST_API/Messages/
+    type: Documentation
+  - url: https://talkjs.com/docs/Reference/REST_API/Messages/
+    type: APIReference
+  - url: openapi/talkjs-openapi.yml
+    type: OpenAPI
+  - url: collections/talkjs.postman_collection.json
+    type: PostmanCollection
+  description: Send, list, fetch, edit, and delete messages in a conversation,
+    including UserMessage and SystemMessage types, replies via referencedMessageId,
+    idempotency keys, and emoji reactions.
+- aid: talkjs:talkjs-import-api
+  name: TalkJS Import API
+  tags:
+  - Import
+  - Migration
+  - History
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://talkjs.com/docs/Reference/REST_API/Importing_Messages/
+  baseURL: https://api.talkjs.com/v1/{appId}
+  properties:
+  - url: https://talkjs.com/docs/Reference/REST_API/Importing_Messages/
+    type: Documentation
+  - url: https://talkjs.com/docs/Reference/REST_API/Importing_Messages/
+    type: APIReference
+  - url: openapi/talkjs-openapi.yml
+    type: OpenAPI
+  - url: collections/talkjs.postman_collection.json
+    type: PostmanCollection
+  description: Import existing chat history with original timestamps via the special
+    importing resource, used after upserting users and conversations to migrate
+    from other chat providers into TalkJS.
+- aid: talkjs:talkjs-webhooks-api
+  name: TalkJS Webhooks API
+  tags:
+  - Webhooks
+  - Events
+  - Notifications
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://talkjs.com/docs/Reference/Webhooks/
+  baseURL: https://api.talkjs.com/v1/{appId}
+  properties:
+  - url: https://talkjs.com/docs/Reference/Webhooks/
+    type: Documentation
+  - url: https://talkjs.com/docs/Reference/Webhooks/
+    type: APIReference
+  - url: review.yml
+    type: Review
+  description: Server-to-server event delivery for message.sent, message.read,
+    message.updated, message.deleted, user.created/updated, conversation.deleted,
+    and notification lifecycle events, posted as JSON with an id/type/createdAt/data
+    envelope to your configured endpoints.
+common:
+- type: GitHubOrganization
+  url: https://github.com/talkjs
+- type: LinkedIn
+  url: https://www.linkedin.com/company/talkjs
+- type: Website
+  url: https://talkjs.com
+- type: Documentation
+  url: https://talkjs.com/docs/
+- type: Plans
+  url: plans/talkjs-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/talkjs-rate-limits.yml
+- type: FinOps
+  url: finops/talkjs-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
