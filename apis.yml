@@ -123,6 +123,14 @@ apis:
     and notification lifecycle events, posted as JSON with an id/type/createdAt/data
     envelope to your configured endpoints.
 common:
+- type: TrustCenter
+  url: security/talkjs-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/talkjs-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/talkjs-domain-security.yml
+- type: Authentication
+  url: authentication/talkjs-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/talkjs
 - type: LinkedIn
@@ -137,6 +145,8 @@ common:
   url: rate-limits/talkjs-rate-limits.yml
 - type: FinOps
   url: finops/talkjs-finops.yml
+- url: https://talkjs.com/resources/rss/
+  type: Blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/talkjs-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: 'A TalkJS secret key or a short-lived JWT with admin claims, sent as "Authorization:
+    Bearer <token>".'
+  sources:
+  - openapi/talkjs-openapi.yml
