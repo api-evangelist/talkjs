@@ -123,6 +123,8 @@ apis:
     and notification lifecycle events, posted as JSON with an id/type/createdAt/data
     envelope to your configured endpoints.
 common:
+- type: AgenticAccess
+  url: agentic-access/talkjs-agentic-access.yml
 - type: TrustCenter
   url: security/talkjs-trust-center.yml
 - type: VulnerabilityDisclosure
