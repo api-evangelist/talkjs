@@ -1,0 +1,347 @@
+openapi: 3.0.1
+info:
+  title: TalkJS REST Conversations API
+  description: The TalkJS REST API for managing users, conversations, participants, and messages, and for importing existing chat history. All requests are scoped to an application by appId in the path and authenticated with a Bearer token (a server-side secret key or a short-lived JWT with admin claims).
+  termsOfService: https://talkjs.com/terms-of-service/
+  contact:
+    name: TalkJS Support
+    url: https://talkjs.com/contact/
+  version: '1.0'
+servers:
+- url: https://api.talkjs.com/v1/{appId}
+  description: TalkJS REST API, scoped to a single application.
+  variables:
+    appId:
+      default: YOUR_APP_ID
+      description: Your TalkJS application identifier from the dashboard.
+security:
+- bearerAuth: []
+tags:
+- name: Conversations
+  description: Create, update, list, and delete conversations.
+paths:
+  /users/{userId}/conversations:
+    parameters:
+    - $ref: '#/components/parameters/UserId'
+    get:
+      operationId: listUserConversations
+      tags:
+      - Conversations
+      summary: List a user's conversations
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/StartingAfter'
+      responses:
+        '200':
+          description: A page of conversations the user participates in.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /conversations:
+    get:
+      operationId: listConversations
+      tags:
+      - Conversations
+      summary: List conversations
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/StartingAfter'
+      responses:
+        '200':
+          description: A page of conversations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /conversations/{conversationId}:
+    parameters:
+    - $ref: '#/components/parameters/ConversationId'
+    get:
+      operationId: getConversation
+      tags:
+      - Conversations
+      summary: Retrieve a conversation
+      responses:
+        '200':
+          description: The requested conversation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversation'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: createOrUpdateConversation
+      tags:
+      - Conversations
+      summary: Create or update a conversation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConversationInput'
+      responses:
+        '200':
+          description: The conversation was created or updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversation'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    delete:
+      operationId: deleteConversation
+      tags:
+      - Conversations
+      summary: Delete a conversation
+      responses:
+        '200':
+          description: The conversation was deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /users/{userId}/conversations/{conversationId}:
+    parameters:
+    - $ref: '#/components/parameters/UserId'
+    - $ref: '#/components/parameters/ConversationId'
+    patch:
+      operationId: markConversationRead
+      tags:
+      - Conversations
+      summary: Mark a conversation read or unread for a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                readUntil:
+                  oneOf:
+                  - type: integer
+                    format: int64
+                    description: Unix timestamp in ms up to which the user has read.
+                  - type: string
+                    enum:
+                    - sent
+                  description: Read marker, or "sent" to mark fully read.
+      responses:
+        '200':
+          description: Read state updated.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    Conversation:
+      type: object
+      properties:
+        id:
+          type: string
+        subject:
+          type: string
+          nullable: true
+        photoUrl:
+          type: string
+          nullable: true
+        welcomeMessages:
+          type: array
+          items:
+            type: string
+          nullable: true
+        custom:
+          $ref: '#/components/schemas/Custom'
+        topicId:
+          type: string
+          nullable: true
+        lastMessage:
+          $ref: '#/components/schemas/Message'
+        participants:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Participant'
+        createdAt:
+          type: integer
+          format: int64
+        everyoneReadUntil:
+          type: integer
+          format: int64
+          nullable: true
+    ConversationInput:
+      type: object
+      properties:
+        subject:
+          type: string
+          nullable: true
+        photoUrl:
+          type: string
+          nullable: true
+        welcomeMessages:
+          type: array
+          items:
+            type: string
+          nullable: true
+        custom:
+          $ref: '#/components/schemas/Custom'
+        participants:
+          type: array
+          items:
+            type: string
+          description: User ids to add as participants.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+    ConversationList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Conversation'
+    Custom:
+      type: object
+      additionalProperties:
+        type: string
+      description: Custom key-value metadata (string values).
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+        conversationId:
+          type: string
+        senderId:
+          type: string
+          nullable: true
+        type:
+          type: string
+          enum:
+          - UserMessage
+          - SystemMessage
+        origin:
+          type: string
+          enum:
+          - rest
+          - email
+          - import
+          - web
+        text:
+          type: string
+          nullable: true
+        attachment:
+          type: object
+          nullable: true
+        location:
+          type: array
+          items:
+            type: number
+          nullable: true
+        custom:
+          $ref: '#/components/schemas/Custom'
+        readBy:
+          type: array
+          items:
+            type: string
+        referencedMessageId:
+          type: string
+          nullable: true
+        reactions:
+          type: object
+          additionalProperties: true
+        createdAt:
+          type: integer
+          format: int64
+        editedAt:
+          type: integer
+          format: int64
+          nullable: true
+    Participant:
+      type: object
+      properties:
+        access:
+          type: string
+          enum:
+          - ReadWrite
+          - Read
+        notify:
+          oneOf:
+          - type: boolean
+          - type: string
+            enum:
+            - MentionsOnly
+        isUnread:
+          type: boolean
+        joinedAt:
+          type: integer
+          format: int64
+        readUntil:
+          type: integer
+          format: int64
+          nullable: true
+  responses:
+    NotFound:
+      description: The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Too many requests; the rate limit was exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid authentication token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    StartingAfter:
+      name: startingAfter
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Pagination cursor; returns items after this id.
+    UserId:
+      name: userId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique user identifier.
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Maximum number of items to return per page.
+    ConversationId:
+      name: conversationId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique conversation identifier.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'A TalkJS secret key or a short-lived JWT with admin claims, sent as "Authorization: Bearer <token>".'

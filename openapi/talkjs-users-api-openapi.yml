@@ -1,0 +1,402 @@
+openapi: 3.0.1
+info:
+  title: TalkJS REST Conversations Users API
+  description: The TalkJS REST API for managing users, conversations, participants, and messages, and for importing existing chat history. All requests are scoped to an application by appId in the path and authenticated with a Bearer token (a server-side secret key or a short-lived JWT with admin claims).
+  termsOfService: https://talkjs.com/terms-of-service/
+  contact:
+    name: TalkJS Support
+    url: https://talkjs.com/contact/
+  version: '1.0'
+servers:
+- url: https://api.talkjs.com/v1/{appId}
+  description: TalkJS REST API, scoped to a single application.
+  variables:
+    appId:
+      default: YOUR_APP_ID
+      description: Your TalkJS application identifier from the dashboard.
+security:
+- bearerAuth: []
+tags:
+- name: Users
+  description: Create, update, retrieve, and list users; manage presence.
+paths:
+  /users/{userId}:
+    parameters:
+    - $ref: '#/components/parameters/UserId'
+    put:
+      operationId: createOrUpdateUser
+      tags:
+      - Users
+      summary: Create or update a user
+      description: Upserts a user. Only the subset of fields you send is updated (PATCH-style semantics).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+      responses:
+        '200':
+          description: The user was created or updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    get:
+      operationId: getUser
+      tags:
+      - Users
+      summary: Retrieve a user
+      responses:
+        '200':
+          description: The requested user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /users:
+    get:
+      operationId: listUsers
+      tags:
+      - Users
+      summary: List users
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/StartingAfter'
+      responses:
+        '200':
+          description: A page of users.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    put:
+      operationId: batchUpdateUsers
+      tags:
+      - Users
+      summary: Batch create or update users
+      description: Upserts up to 100 users in a single request.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                $ref: '#/components/schemas/UserInput'
+              description: Map of userId to user object.
+      responses:
+        '200':
+          description: The users were created or updated.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /users/{userId}/conversations:
+    parameters:
+    - $ref: '#/components/parameters/UserId'
+    get:
+      operationId: listUserConversations
+      tags:
+      - Users
+      summary: List a user's conversations
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/StartingAfter'
+      responses:
+        '200':
+          description: A page of conversations the user participates in.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /users/{userId}/presence:
+    parameters:
+    - $ref: '#/components/parameters/UserId'
+    get:
+      operationId: getUserPresence
+      tags:
+      - Users
+      summary: Get user presence
+      responses:
+        '200':
+          description: The user's presence.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Presence'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    put:
+      operationId: setUserPresence
+      tags:
+      - Users
+      summary: Set user presence
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Presence'
+      responses:
+        '200':
+          description: Presence updated.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    User:
+      allOf:
+      - $ref: '#/components/schemas/UserInput'
+      - type: object
+        properties:
+          id:
+            type: string
+          createdAt:
+            type: integer
+            format: int64
+            description: Unix timestamp in milliseconds.
+    UserInput:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        email:
+          type: array
+          items:
+            type: string
+          nullable: true
+        phone:
+          type: array
+          items:
+            type: string
+          nullable: true
+        photoUrl:
+          type: string
+          nullable: true
+        role:
+          type: string
+          nullable: true
+        welcomeMessage:
+          type: string
+          nullable: true
+        availabilityText:
+          type: string
+          nullable: true
+        locale:
+          type: string
+          nullable: true
+        custom:
+          $ref: '#/components/schemas/Custom'
+        pushTokens:
+          type: object
+          additionalProperties: true
+          nullable: true
+    Conversation:
+      type: object
+      properties:
+        id:
+          type: string
+        subject:
+          type: string
+          nullable: true
+        photoUrl:
+          type: string
+          nullable: true
+        welcomeMessages:
+          type: array
+          items:
+            type: string
+          nullable: true
+        custom:
+          $ref: '#/components/schemas/Custom'
+        topicId:
+          type: string
+          nullable: true
+        lastMessage:
+          $ref: '#/components/schemas/Message'
+        participants:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Participant'
+        createdAt:
+          type: integer
+          format: int64
+        everyoneReadUntil:
+          type: integer
+          format: int64
+          nullable: true
+    ConversationList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Conversation'
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+    Presence:
+      type: object
+      properties:
+        visible:
+          type: boolean
+        lastChanged:
+          type: integer
+          format: int64
+        availability:
+          type: string
+          enum:
+          - online
+          - offline
+    Custom:
+      type: object
+      additionalProperties:
+        type: string
+      description: Custom key-value metadata (string values).
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+        conversationId:
+          type: string
+        senderId:
+          type: string
+          nullable: true
+        type:
+          type: string
+          enum:
+          - UserMessage
+          - SystemMessage
+        origin:
+          type: string
+          enum:
+          - rest
+          - email
+          - import
+          - web
+        text:
+          type: string
+          nullable: true
+        attachment:
+          type: object
+          nullable: true
+        location:
+          type: array
+          items:
+            type: number
+          nullable: true
+        custom:
+          $ref: '#/components/schemas/Custom'
+        readBy:
+          type: array
+          items:
+            type: string
+        referencedMessageId:
+          type: string
+          nullable: true
+        reactions:
+          type: object
+          additionalProperties: true
+        createdAt:
+          type: integer
+          format: int64
+        editedAt:
+          type: integer
+          format: int64
+          nullable: true
+    Participant:
+      type: object
+      properties:
+        access:
+          type: string
+          enum:
+          - ReadWrite
+          - Read
+        notify:
+          oneOf:
+          - type: boolean
+          - type: string
+            enum:
+            - MentionsOnly
+        isUnread:
+          type: boolean
+        joinedAt:
+          type: integer
+          format: int64
+        readUntil:
+          type: integer
+          format: int64
+          nullable: true
+    UserList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+  responses:
+    NotFound:
+      description: The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Too many requests; the rate limit was exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid authentication token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    StartingAfter:
+      name: startingAfter
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Pagination cursor; returns items after this id.
+    UserId:
+      name: userId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique user identifier.
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Maximum number of items to return per page.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'A TalkJS secret key or a short-lived JWT with admin claims, sent as "Authorization: Bearer <token>".'

@@ -1,0 +1,150 @@
+openapi: 3.0.1
+info:
+  title: TalkJS REST Conversations Import API
+  description: The TalkJS REST API for managing users, conversations, participants, and messages, and for importing existing chat history. All requests are scoped to an application by appId in the path and authenticated with a Bearer token (a server-side secret key or a short-lived JWT with admin claims).
+  termsOfService: https://talkjs.com/terms-of-service/
+  contact:
+    name: TalkJS Support
+    url: https://talkjs.com/contact/
+  version: '1.0'
+servers:
+- url: https://api.talkjs.com/v1/{appId}
+  description: TalkJS REST API, scoped to a single application.
+  variables:
+    appId:
+      default: YOUR_APP_ID
+      description: Your TalkJS application identifier from the dashboard.
+security:
+- bearerAuth: []
+tags:
+- name: Import
+  description: Import messages with original timestamps.
+paths:
+  /import/conversations/{conversationId}/messages:
+    parameters:
+    - $ref: '#/components/parameters/ConversationId'
+    post:
+      operationId: importMessages
+      tags:
+      - Import
+      summary: Import messages with timestamps
+      description: Imports messages into a conversation preserving original createdAt timestamps. Import users and conversations with the normal endpoints first, then import their messages here.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ImportMessageInput'
+      responses:
+        '200':
+          description: The messages were imported.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /batch:
+    post:
+      operationId: batchRequests
+      tags:
+      - Import
+      summary: Execute a batch of API operations
+      description: Executes multiple REST API operations in a single request (1 batch per second).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+      responses:
+        '200':
+          description: The batch was processed.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  schemas:
+    ImportMessageInput:
+      allOf:
+      - $ref: '#/components/schemas/SendMessageInput'
+      - type: object
+        properties:
+          createdAt:
+            type: integer
+            format: int64
+            description: Original Unix timestamp in milliseconds to preserve.
+          readBy:
+            type: array
+            items:
+              type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+    Custom:
+      type: object
+      additionalProperties:
+        type: string
+      description: Custom key-value metadata (string values).
+    SendMessageInput:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          type: string
+          enum:
+          - UserMessage
+          - SystemMessage
+        text:
+          type: string
+          description: The message text. Mutually exclusive with content.
+        content:
+          type: array
+          items:
+            type: object
+          description: Rich content blocks. Mutually exclusive with text.
+        sender:
+          type: string
+          description: Sender user id; required for UserMessage, omitted for SystemMessage.
+        referencedMessageId:
+          type: string
+          nullable: true
+        custom:
+          $ref: '#/components/schemas/Custom'
+        idempotencyKey:
+          type: string
+          description: Ensures exactly-once delivery for 24 hours.
+  responses:
+    RateLimited:
+      description: Too many requests; the rate limit was exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid authentication token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    ConversationId:
+      name: conversationId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique conversation identifier.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'A TalkJS secret key or a short-lived JWT with admin claims, sent as "Authorization: Bearer <token>".'

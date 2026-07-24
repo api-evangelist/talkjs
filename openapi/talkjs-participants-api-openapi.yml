@@ -1,0 +1,133 @@
+openapi: 3.0.1
+info:
+  title: TalkJS REST Conversations Participants API
+  description: The TalkJS REST API for managing users, conversations, participants, and messages, and for importing existing chat history. All requests are scoped to an application by appId in the path and authenticated with a Bearer token (a server-side secret key or a short-lived JWT with admin claims).
+  termsOfService: https://talkjs.com/terms-of-service/
+  contact:
+    name: TalkJS Support
+    url: https://talkjs.com/contact/
+  version: '1.0'
+servers:
+- url: https://api.talkjs.com/v1/{appId}
+  description: TalkJS REST API, scoped to a single application.
+  variables:
+    appId:
+      default: YOUR_APP_ID
+      description: Your TalkJS application identifier from the dashboard.
+security:
+- bearerAuth: []
+tags:
+- name: Participants
+  description: Add, update, and remove conversation participants.
+paths:
+  /conversations/{conversationId}/participants/{userId}:
+    parameters:
+    - $ref: '#/components/parameters/ConversationId'
+    - $ref: '#/components/parameters/UserId'
+    put:
+      operationId: joinConversation
+      tags:
+      - Participants
+      summary: Add or update a participant
+      description: Adds a user to the conversation or updates their access and notify settings.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParticipationInput'
+      responses:
+        '200':
+          description: The participant was added or updated.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: leaveConversation
+      tags:
+      - Participants
+      summary: Remove a participant
+      responses:
+        '200':
+          description: The participant was removed.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /users/{userId}/conversations/{conversationId}:
+    parameters:
+    - $ref: '#/components/parameters/UserId'
+    - $ref: '#/components/parameters/ConversationId'
+    patch:
+      operationId: markConversationRead
+      tags:
+      - Participants
+      summary: Mark a conversation read or unread for a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                readUntil:
+                  oneOf:
+                  - type: integer
+                    format: int64
+                    description: Unix timestamp in ms up to which the user has read.
+                  - type: string
+                    enum:
+                    - sent
+                  description: Read marker, or "sent" to mark fully read.
+      responses:
+        '200':
+          description: Read state updated.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    ParticipationInput:
+      type: object
+      properties:
+        access:
+          type: string
+          enum:
+          - ReadWrite
+          - Read
+        notify:
+          oneOf:
+          - type: boolean
+          - type: string
+            enum:
+            - MentionsOnly
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid authentication token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    UserId:
+      name: userId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique user identifier.
+    ConversationId:
+      name: conversationId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique conversation identifier.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'A TalkJS secret key or a short-lived JWT with admin claims, sent as "Authorization: Bearer <token>".'
