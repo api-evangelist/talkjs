@@ -7,7 +7,20 @@ description: TalkJS is a chat API and SDK for adding messaging to web and mobile
   Chat UI) with a server-side REST API at https://api.talkjs.com/v1/{appId} for
   managing users, conversations, participants, and messages, importing existing
   chat history, and receiving events via webhooks.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/talkjs.png
 tags:
 - Chat
 - Messaging
@@ -18,90 +31,6 @@ created: '2026-06-20'
 modified: '2026-06-20'
 specificationVersion: '0.19'
 apis:
-- aid: talkjs:talkjs-users-api
-  name: TalkJS Users API
-  tags:
-  - Users
-  - Presence
-  - Profiles
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://talkjs.com/docs/Reference/REST_API/Users/
-  baseURL: https://api.talkjs.com/v1/{appId}
-  properties:
-  - url: https://talkjs.com/docs/Reference/REST_API/Users/
-    type: Documentation
-  - url: https://talkjs.com/docs/Reference/REST_API/Users/
-    type: APIReference
-  - url: openapi/talkjs-openapi.yml
-    type: OpenAPI
-  - url: collections/talkjs.postman_collection.json
-    type: PostmanCollection
-  description: Create, update, and retrieve TalkJS users, list users and a user's
-    conversations, and manage per-user presence. Users are timeless resources
-    upserted with PUT and updated PATCH-style with a subset of fields.
-- aid: talkjs:talkjs-conversations-api
-  name: TalkJS Conversations & Participants API
-  tags:
-  - Conversations
-  - Participants
-  - Access
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://talkjs.com/docs/Reference/REST_API/Conversations/
-  baseURL: https://api.talkjs.com/v1/{appId}
-  properties:
-  - url: https://talkjs.com/docs/Reference/REST_API/Conversations/
-    type: Documentation
-  - url: https://talkjs.com/docs/Reference/REST_API/Conversations/
-    type: APIReference
-  - url: openapi/talkjs-openapi.yml
-    type: OpenAPI
-  - url: collections/talkjs.postman_collection.json
-    type: PostmanCollection
-  description: Create, update, list, and delete conversations, and manage their
-    participants - join (PUT), leave (DELETE), and set access (ReadWrite/Read) and
-    notification preferences. Includes marking conversations read/unread per user.
-- aid: talkjs:talkjs-messages-api
-  name: TalkJS Messages API
-  tags:
-  - Messages
-  - Reactions
-  - Replies
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://talkjs.com/docs/Reference/REST_API/Messages/
-  baseURL: https://api.talkjs.com/v1/{appId}
-  properties:
-  - url: https://talkjs.com/docs/Reference/REST_API/Messages/
-    type: Documentation
-  - url: https://talkjs.com/docs/Reference/REST_API/Messages/
-    type: APIReference
-  - url: openapi/talkjs-openapi.yml
-    type: OpenAPI
-  - url: collections/talkjs.postman_collection.json
-    type: PostmanCollection
-  description: Send, list, fetch, edit, and delete messages in a conversation,
-    including UserMessage and SystemMessage types, replies via referencedMessageId,
-    idempotency keys, and emoji reactions.
-- aid: talkjs:talkjs-import-api
-  name: TalkJS Import API
-  tags:
-  - Import
-  - Migration
-  - History
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://talkjs.com/docs/Reference/REST_API/Importing_Messages/
-  baseURL: https://api.talkjs.com/v1/{appId}
-  properties:
-  - url: https://talkjs.com/docs/Reference/REST_API/Importing_Messages/
-    type: Documentation
-  - url: https://talkjs.com/docs/Reference/REST_API/Importing_Messages/
-    type: APIReference
-  - url: openapi/talkjs-openapi.yml
-    type: OpenAPI
-  - url: collections/talkjs.postman_collection.json
-    type: PostmanCollection
-  description: Import existing chat history with original timestamps via the special
-    importing resource, used after upserting users and conversations to migrate
-    from other chat providers into TalkJS.
 - aid: talkjs:talkjs-webhooks-api
   name: TalkJS Webhooks API
   tags:
@@ -118,10 +47,150 @@ apis:
     type: APIReference
   - url: review.yml
     type: Review
-  description: Server-to-server event delivery for message.sent, message.read,
-    message.updated, message.deleted, user.created/updated, conversation.deleted,
-    and notification lifecycle events, posted as JSON with an id/type/createdAt/data
-    envelope to your configured endpoints.
+  description: >-
+    Server-to-server event delivery for message.sent, message.read, message.updated, message.deleted,
+    user.created/updated, conversation.deleted, and notification lifecycle events, posted as JSON with
+    an id/type/createdAt/data envelope to your configured endpoints.
+- aid: talkjs:talkjs-conversations-api
+  name: TalkJS Conversations API
+  description: Create, update, list, and delete conversations.
+  humanURL: https://talkjs.com/docs/Reference/REST_API/Users/
+  baseURL: https://api.talkjs.com/v1/{appId}
+  tags:
+  - Conversations
+  properties:
+  - type: OpenAPI
+    url: openapi/talkjs-conversations-api-openapi.yml
+  - type: Documentation
+    url: https://talkjs.com/docs/Reference/REST_API/Users/
+  - type: APIReference
+    url: https://talkjs.com/docs/Reference/REST_API/Users/
+  - type: PostmanCollection
+    url: collections/talkjs.postman_collection.json
+  - type: Documentation
+    url: https://talkjs.com/docs/Reference/REST_API/Conversations/
+  - type: APIReference
+    url: https://talkjs.com/docs/Reference/REST_API/Conversations/
+  - type: Documentation
+    url: https://talkjs.com/docs/Reference/REST_API/Messages/
+  - type: APIReference
+    url: https://talkjs.com/docs/Reference/REST_API/Messages/
+  - type: Documentation
+    url: https://talkjs.com/docs/Reference/REST_API/Importing_Messages/
+  - type: APIReference
+    url: https://talkjs.com/docs/Reference/REST_API/Importing_Messages/
+- aid: talkjs:talkjs-import-api
+  name: TalkJS Import API
+  description: Import messages with original timestamps.
+  humanURL: https://talkjs.com/docs/Reference/REST_API/Users/
+  baseURL: https://api.talkjs.com/v1/{appId}
+  tags:
+  - Import
+  properties:
+  - type: OpenAPI
+    url: openapi/talkjs-import-api-openapi.yml
+  - type: Documentation
+    url: https://talkjs.com/docs/Reference/REST_API/Users/
+  - type: APIReference
+    url: https://talkjs.com/docs/Reference/REST_API/Users/
+  - type: PostmanCollection
+    url: collections/talkjs.postman_collection.json
+  - type: Documentation
+    url: https://talkjs.com/docs/Reference/REST_API/Conversations/
+  - type: APIReference
+    url: https://talkjs.com/docs/Reference/REST_API/Conversations/
+  - type: Documentation
+    url: https://talkjs.com/docs/Reference/REST_API/Messages/
+  - type: APIReference
+    url: https://talkjs.com/docs/Reference/REST_API/Messages/
+  - type: Documentation
+    url: https://talkjs.com/docs/Reference/REST_API/Importing_Messages/
+  - type: APIReference
+    url: https://talkjs.com/docs/Reference/REST_API/Importing_Messages/
+- aid: talkjs:talkjs-messages-api
+  name: TalkJS Messages API
+  description: Send, list, fetch, edit, delete messages, and manage reactions.
+  humanURL: https://talkjs.com/docs/Reference/REST_API/Users/
+  baseURL: https://api.talkjs.com/v1/{appId}
+  tags:
+  - Messages
+  properties:
+  - type: OpenAPI
+    url: openapi/talkjs-messages-api-openapi.yml
+  - type: Documentation
+    url: https://talkjs.com/docs/Reference/REST_API/Users/
+  - type: APIReference
+    url: https://talkjs.com/docs/Reference/REST_API/Users/
+  - type: PostmanCollection
+    url: collections/talkjs.postman_collection.json
+  - type: Documentation
+    url: https://talkjs.com/docs/Reference/REST_API/Conversations/
+  - type: APIReference
+    url: https://talkjs.com/docs/Reference/REST_API/Conversations/
+  - type: Documentation
+    url: https://talkjs.com/docs/Reference/REST_API/Messages/
+  - type: APIReference
+    url: https://talkjs.com/docs/Reference/REST_API/Messages/
+  - type: Documentation
+    url: https://talkjs.com/docs/Reference/REST_API/Importing_Messages/
+  - type: APIReference
+    url: https://talkjs.com/docs/Reference/REST_API/Importing_Messages/
+- aid: talkjs:talkjs-participants-api
+  name: TalkJS Participants API
+  description: Add, update, and remove conversation participants.
+  humanURL: https://talkjs.com/docs/Reference/REST_API/Users/
+  baseURL: https://api.talkjs.com/v1/{appId}
+  tags:
+  - Participants
+  properties:
+  - type: OpenAPI
+    url: openapi/talkjs-participants-api-openapi.yml
+  - type: Documentation
+    url: https://talkjs.com/docs/Reference/REST_API/Users/
+  - type: APIReference
+    url: https://talkjs.com/docs/Reference/REST_API/Users/
+  - type: PostmanCollection
+    url: collections/talkjs.postman_collection.json
+  - type: Documentation
+    url: https://talkjs.com/docs/Reference/REST_API/Conversations/
+  - type: APIReference
+    url: https://talkjs.com/docs/Reference/REST_API/Conversations/
+  - type: Documentation
+    url: https://talkjs.com/docs/Reference/REST_API/Messages/
+  - type: APIReference
+    url: https://talkjs.com/docs/Reference/REST_API/Messages/
+  - type: Documentation
+    url: https://talkjs.com/docs/Reference/REST_API/Importing_Messages/
+  - type: APIReference
+    url: https://talkjs.com/docs/Reference/REST_API/Importing_Messages/
+- aid: talkjs:talkjs-users-api
+  name: TalkJS Users API
+  description: Create, update, retrieve, and list users; manage presence.
+  humanURL: https://talkjs.com/docs/Reference/REST_API/Users/
+  baseURL: https://api.talkjs.com/v1/{appId}
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/talkjs-users-api-openapi.yml
+  - type: Documentation
+    url: https://talkjs.com/docs/Reference/REST_API/Users/
+  - type: APIReference
+    url: https://talkjs.com/docs/Reference/REST_API/Users/
+  - type: PostmanCollection
+    url: collections/talkjs.postman_collection.json
+  - type: Documentation
+    url: https://talkjs.com/docs/Reference/REST_API/Conversations/
+  - type: APIReference
+    url: https://talkjs.com/docs/Reference/REST_API/Conversations/
+  - type: Documentation
+    url: https://talkjs.com/docs/Reference/REST_API/Messages/
+  - type: APIReference
+    url: https://talkjs.com/docs/Reference/REST_API/Messages/
+  - type: Documentation
+    url: https://talkjs.com/docs/Reference/REST_API/Importing_Messages/
+  - type: APIReference
+    url: https://talkjs.com/docs/Reference/REST_API/Importing_Messages/
 common:
 - type: AgenticAccess
   url: agentic-access/talkjs-agentic-access.yml
