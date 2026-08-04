@@ -1,0 +1,22 @@
+{
+  "provider": "talkjs",
+  "sources": [
+    "talkjs-conversations-api-openapi.yml",
+    "talkjs-import-api-openapi.yml",
+    "talkjs-messages-api-openapi.yml",
+    "talkjs-participants-api-openapi.yml",
+    "talkjs-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "talkjs-conversations-api-openapi.yml",
+    "talkjs-import-api-openapi.yml",
+    "talkjs-messages-api-openapi.yml",
+    "talkjs-participants-api-openapi.yml",
+    "talkjs-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
