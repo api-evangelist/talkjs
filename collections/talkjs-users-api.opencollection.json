@@ -1,0 +1,179 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TalkJS REST Conversations Users API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.talkjs.com/v1/{appId}/users/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique user identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve a user"
+        },
+        {
+          "info": {
+            "name": "Create or update a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.talkjs.com/v1/{appId}/users/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique user identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upserts a user. Only the subset of fields you send is updated (PATCH-style semantics)."
+        },
+        {
+          "info": {
+            "name": "List users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.talkjs.com/v1/{appId}/users",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return per page."
+              },
+              {
+                "name": "startingAfter",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor; returns items after this id."
+              }
+            ]
+          },
+          "docs": "List users"
+        },
+        {
+          "info": {
+            "name": "Batch create or update users",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.talkjs.com/v1/{appId}/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upserts up to 100 users in a single request."
+        },
+        {
+          "info": {
+            "name": "List a user's conversations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.talkjs.com/v1/{appId}/users/:userId/conversations",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique user identifier."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return per page."
+              },
+              {
+                "name": "startingAfter",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor; returns items after this id."
+              }
+            ]
+          },
+          "docs": "List a user's conversations"
+        },
+        {
+          "info": {
+            "name": "Get user presence",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.talkjs.com/v1/{appId}/users/:userId/presence",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique user identifier."
+              }
+            ]
+          },
+          "docs": "Get user presence"
+        },
+        {
+          "info": {
+            "name": "Set user presence",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.talkjs.com/v1/{appId}/users/:userId/presence",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique user identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set user presence"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

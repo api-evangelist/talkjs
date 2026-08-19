@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TalkJS REST Conversations Import API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Import",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Import messages with timestamps",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.talkjs.com/v1/{appId}/import/conversations/:conversationId/messages",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path",
+                "description": "The unique conversation identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Imports messages into a conversation preserving original createdAt timestamps. Import users and conversations with the normal endpoints first, then import their messages here."
+        },
+        {
+          "info": {
+            "name": "Execute a batch of API operations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.talkjs.com/v1/{appId}/batch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes multiple REST API operations in a single request (1 batch per second)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

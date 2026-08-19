@@ -1,0 +1,540 @@
+{
+  "item": [
+    {
+      "id": "a0f94aa8-be37-4ef9-ad4f-cde6d3c90d54",
+      "name": "Import",
+      "description": {
+        "content": "Import messages with original timestamps.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "036b8475-446a-452a-842c-e926aa390a24",
+          "name": "Import messages with timestamps",
+          "request": {
+            "name": "Import messages with timestamps",
+            "description": {
+              "content": "Imports messages into a conversation preserving original createdAt timestamps. Import users and conversations with the normal endpoints first, then import their messages here.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "import",
+                "conversations",
+                ":conversationId",
+                "messages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "conversationId",
+                  "description": "(Required) The unique conversation identifier."
+                },
+                {
+                  "description": "Your TalkJS application identifier from the dashboard.",
+                  "type": "any",
+                  "value": "{{appId}}",
+                  "key": "appId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"type\": \"<string>\",\n    \"text\": \"<string>\",\n    \"content\": [\n      \"<object>\",\n      \"<object>\"\n    ],\n    \"sender\": \"<string>\",\n    \"referencedMessageId\": \"<string>\",\n    \"custom\": {\n      \"key_0\": \"<string>\"\n    },\n    \"idempotencyKey\": \"<string>\",\n    \"createdAt\": \"<long>\",\n    \"readBy\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  {\n    \"type\": \"<string>\",\n    \"text\": \"<string>\",\n    \"content\": [\n      \"<object>\",\n      \"<object>\"\n    ],\n    \"sender\": \"<string>\",\n    \"referencedMessageId\": \"<string>\",\n    \"custom\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"idempotencyKey\": \"<string>\",\n    \"createdAt\": \"<long>\",\n    \"readBy\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "32ffe115-2d6d-4ae7-86de-44197b4d7e17",
+              "name": "The messages were imported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "import",
+                    "conversations",
+                    ":conversationId",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversationId",
+                      "description": "(Required) The unique conversation identifier."
+                    },
+                    {
+                      "description": "Your TalkJS application identifier from the dashboard.",
+                      "type": "any",
+                      "value": "{{appId}}",
+                      "key": "appId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"type\": \"<string>\",\n    \"text\": \"<string>\",\n    \"content\": [\n      \"<object>\",\n      \"<object>\"\n    ],\n    \"sender\": \"<string>\",\n    \"referencedMessageId\": \"<string>\",\n    \"custom\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"idempotencyKey\": \"<string>\",\n    \"createdAt\": \"<long>\",\n    \"readBy\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  {\n    \"type\": \"<string>\",\n    \"text\": \"<string>\",\n    \"content\": [\n      \"<object>\",\n      \"<object>\"\n    ],\n    \"sender\": \"<string>\",\n    \"referencedMessageId\": \"<string>\",\n    \"custom\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"idempotencyKey\": \"<string>\",\n    \"createdAt\": \"<long>\",\n    \"readBy\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fc04ed88-fc98-42b1-84d4-d49c9094bf1e",
+              "name": "Missing or invalid authentication token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "import",
+                    "conversations",
+                    ":conversationId",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversationId",
+                      "description": "(Required) The unique conversation identifier."
+                    },
+                    {
+                      "description": "Your TalkJS application identifier from the dashboard.",
+                      "type": "any",
+                      "value": "{{appId}}",
+                      "key": "appId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"type\": \"<string>\",\n    \"text\": \"<string>\",\n    \"content\": [\n      \"<object>\",\n      \"<object>\"\n    ],\n    \"sender\": \"<string>\",\n    \"referencedMessageId\": \"<string>\",\n    \"custom\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"idempotencyKey\": \"<string>\",\n    \"createdAt\": \"<long>\",\n    \"readBy\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  {\n    \"type\": \"<string>\",\n    \"text\": \"<string>\",\n    \"content\": [\n      \"<object>\",\n      \"<object>\"\n    ],\n    \"sender\": \"<string>\",\n    \"referencedMessageId\": \"<string>\",\n    \"custom\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"idempotencyKey\": \"<string>\",\n    \"createdAt\": \"<long>\",\n    \"readBy\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "048ea7af-bc78-4bcc-85e6-b210059d843d",
+              "name": "Too many requests; the rate limit was exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "import",
+                    "conversations",
+                    ":conversationId",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversationId",
+                      "description": "(Required) The unique conversation identifier."
+                    },
+                    {
+                      "description": "Your TalkJS application identifier from the dashboard.",
+                      "type": "any",
+                      "value": "{{appId}}",
+                      "key": "appId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"type\": \"<string>\",\n    \"text\": \"<string>\",\n    \"content\": [\n      \"<object>\",\n      \"<object>\"\n    ],\n    \"sender\": \"<string>\",\n    \"referencedMessageId\": \"<string>\",\n    \"custom\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"idempotencyKey\": \"<string>\",\n    \"createdAt\": \"<long>\",\n    \"readBy\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  {\n    \"type\": \"<string>\",\n    \"text\": \"<string>\",\n    \"content\": [\n      \"<object>\",\n      \"<object>\"\n    ],\n    \"sender\": \"<string>\",\n    \"referencedMessageId\": \"<string>\",\n    \"custom\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"idempotencyKey\": \"<string>\",\n    \"createdAt\": \"<long>\",\n    \"readBy\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca5e15ed-a266-41f1-a111-c083e4ae1363",
+          "name": "Execute a batch of API operations",
+          "request": {
+            "name": "Execute a batch of API operations",
+            "description": {
+              "content": "Executes multiple REST API operations in a single request (1 batch per second).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "batch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your TalkJS application identifier from the dashboard.",
+                  "type": "any",
+                  "value": "{{appId}}",
+                  "key": "appId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  \"<object>\",\n  \"<object>\"\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6caa4f8a-0884-4c4c-8923-6ff3b9e2f1e0",
+              "name": "The batch was processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your TalkJS application identifier from the dashboard.",
+                      "type": "any",
+                      "value": "{{appId}}",
+                      "key": "appId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  \"<object>\",\n  \"<object>\"\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ef62a5de-d631-4ec7-a507-a5b441342d6f",
+              "name": "Missing or invalid authentication token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your TalkJS application identifier from the dashboard.",
+                      "type": "any",
+                      "value": "{{appId}}",
+                      "key": "appId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  \"<object>\",\n  \"<object>\"\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e8270bf-4040-4a71-99b5-fa8adfee1662",
+              "name": "Too many requests; the rate limit was exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your TalkJS application identifier from the dashboard.",
+                      "type": "any",
+                      "value": "{{appId}}",
+                      "key": "appId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  \"<object>\",\n  \"<object>\"\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your TalkJS application identifier from the dashboard.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "YOUR_APP_ID",
+      "key": "appId"
+    },
+    {
+      "type": "string",
+      "value": "https://api.talkjs.com/v1/{{appId}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d98fdf41-cb9b-4f45-96db-ae2e6b7bdd43",
+    "name": "TalkJS REST Conversations Import API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The TalkJS REST API for managing users, conversations, participants, and messages, and for importing existing chat history. All requests are scoped to an application by appId in the path and authenticated with a Bearer token (a server-side secret key or a short-lived JWT with admin claims).\n\nContact Support:\n Name: TalkJS Support",
+      "type": "text/plain"
+    }
+  }
+}

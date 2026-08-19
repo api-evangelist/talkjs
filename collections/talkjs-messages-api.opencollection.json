@@ -1,0 +1,231 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TalkJS REST Conversations Messages API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List messages in a conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.talkjs.com/v1/{appId}/conversations/:conversationId/messages",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path",
+                "description": "The unique conversation identifier."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return per page."
+              },
+              {
+                "name": "startingAfter",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor; returns items after this id."
+              }
+            ]
+          },
+          "docs": "List messages in a conversation"
+        },
+        {
+          "info": {
+            "name": "Send messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.talkjs.com/v1/{appId}/conversations/:conversationId/messages",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path",
+                "description": "The unique conversation identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends one or more messages. The request body is an array of message objects."
+        },
+        {
+          "info": {
+            "name": "Retrieve a message",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.talkjs.com/v1/{appId}/conversations/:conversationId/messages/:messageId",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path",
+                "description": "The unique conversation identifier."
+              },
+              {
+                "name": "messageId",
+                "value": "",
+                "type": "path",
+                "description": "The unique message identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve a message"
+        },
+        {
+          "info": {
+            "name": "Edit a message",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.talkjs.com/v1/{appId}/conversations/:conversationId/messages/:messageId",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path",
+                "description": "The unique conversation identifier."
+              },
+              {
+                "name": "messageId",
+                "value": "",
+                "type": "path",
+                "description": "The unique message identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit a message"
+        },
+        {
+          "info": {
+            "name": "Delete a message",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.talkjs.com/v1/{appId}/conversations/:conversationId/messages/:messageId",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path",
+                "description": "The unique conversation identifier."
+              },
+              {
+                "name": "messageId",
+                "value": "",
+                "type": "path",
+                "description": "The unique message identifier."
+              }
+            ]
+          },
+          "docs": "Delete a message"
+        },
+        {
+          "info": {
+            "name": "Add an emoji reaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.talkjs.com/v1/{appId}/conversations/:conversationId/messages/:messageId/reactions/:emoji/:userId",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path",
+                "description": "The unique conversation identifier."
+              },
+              {
+                "name": "messageId",
+                "value": "",
+                "type": "path",
+                "description": "The unique message identifier."
+              },
+              {
+                "name": "emoji",
+                "value": "",
+                "type": "path",
+                "description": "The emoji for the reaction."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique user identifier."
+              }
+            ]
+          },
+          "docs": "Add an emoji reaction"
+        },
+        {
+          "info": {
+            "name": "Remove an emoji reaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.talkjs.com/v1/{appId}/conversations/:conversationId/messages/:messageId/reactions/:emoji/:userId",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path",
+                "description": "The unique conversation identifier."
+              },
+              {
+                "name": "messageId",
+                "value": "",
+                "type": "path",
+                "description": "The unique message identifier."
+              },
+              {
+                "name": "emoji",
+                "value": "",
+                "type": "path",
+                "description": "The emoji for the reaction."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique user identifier."
+              }
+            ]
+          },
+          "docs": "Remove an emoji reaction"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

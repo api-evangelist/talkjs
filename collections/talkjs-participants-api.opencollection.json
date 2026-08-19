@@ -1,0 +1,107 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TalkJS REST Conversations Participants API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Participants",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add or update a participant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.talkjs.com/v1/{appId}/conversations/:conversationId/participants/:userId",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path",
+                "description": "The unique conversation identifier."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique user identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a user to the conversation or updates their access and notify settings."
+        },
+        {
+          "info": {
+            "name": "Remove a participant",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.talkjs.com/v1/{appId}/conversations/:conversationId/participants/:userId",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path",
+                "description": "The unique conversation identifier."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique user identifier."
+              }
+            ]
+          },
+          "docs": "Remove a participant"
+        },
+        {
+          "info": {
+            "name": "Mark a conversation read or unread for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.talkjs.com/v1/{appId}/users/:userId/conversations/:conversationId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique user identifier."
+              },
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path",
+                "description": "The unique conversation identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Mark a conversation read or unread for a user"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

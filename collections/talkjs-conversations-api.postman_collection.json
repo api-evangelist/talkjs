@@ -1,0 +1,1328 @@
+{
+  "item": [
+    {
+      "id": "5ccf1075-c280-4a1b-8928-16a57d77309e",
+      "name": "Conversations",
+      "description": {
+        "content": "Create, update, list, and delete conversations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "32796bee-d1c2-42dd-b54f-f3b7c71434ab",
+          "name": "List a user's conversations",
+          "request": {
+            "name": "List a user's conversations",
+            "description": {},
+            "url": {
+              "path": [
+                "users",
+                ":userId",
+                "conversations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of items to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "startingAfter",
+                  "value": "<string>",
+                  "description": "Pagination cursor; returns items after this id."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) The unique user identifier."
+                },
+                {
+                  "description": "Your TalkJS application identifier from the dashboard.",
+                  "type": "any",
+                  "value": "{{appId}}",
+                  "key": "appId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6aab770c-37d9-49f5-9a15-27c0528aa629",
+              "name": "A page of conversations the user participates in.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":userId",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startingAfter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The unique user identifier."
+                    },
+                    {
+                      "description": "Your TalkJS application identifier from the dashboard.",
+                      "type": "any",
+                      "value": "{{appId}}",
+                      "key": "appId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"subject\": \"string\",\n      \"photoUrl\": \"string\",\n      \"welcomeMessages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"custom\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\",\n        \"key_4\": \"string\"\n      },\n      \"topicId\": \"string\",\n      \"lastMessage\": {\n        \"id\": \"string\",\n        \"conversationId\": \"string\",\n        \"senderId\": \"string\",\n        \"type\": \"SystemMessage\",\n        \"origin\": \"email\",\n        \"text\": \"string\",\n        \"attachment\": {},\n        \"location\": [\n          5963.164825659668,\n          8316.502131928011\n        ],\n        \"custom\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\",\n          \"key_3\": \"string\"\n        },\n        \"readBy\": [\n          \"string\",\n          \"string\"\n        ],\n        \"referencedMessageId\": \"string\",\n        \"reactions\": {\n          \"key_0\": 8277.992188373195\n        },\n        \"createdAt\": 1355,\n        \"editedAt\": 5285\n      },\n      \"participants\": {\n        \"key_0\": {\n          \"access\": \"ReadWrite\",\n          \"notify\": true,\n          \"isUnread\": true,\n          \"joinedAt\": 2476,\n          \"readUntil\": 5602\n        }\n      },\n      \"createdAt\": 6227,\n      \"everyoneReadUntil\": 6646\n    },\n    {\n      \"id\": \"string\",\n      \"subject\": \"string\",\n      \"photoUrl\": \"string\",\n      \"welcomeMessages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"custom\": {\n        \"key_0\": \"string\"\n      },\n      \"topicId\": \"string\",\n      \"lastMessage\": {\n        \"id\": \"string\",\n        \"conversationId\": \"string\",\n        \"senderId\": \"string\",\n        \"type\": \"SystemMessage\",\n        \"origin\": \"web\",\n        \"text\": \"string\",\n        \"attachment\": {},\n        \"location\": [\n          7977.819182344297,\n          7049.300766875661\n        ],\n        \"custom\": {\n          \"key_0\": \"string\"\n        },\n        \"readBy\": [\n          \"string\",\n          \"string\"\n        ],\n        \"referencedMessageId\": \"string\",\n        \"reactions\": {\n          \"key_0\": \"string\"\n        },\n        \"createdAt\": 5329,\n        \"editedAt\": 9621\n      },\n      \"participants\": {\n        \"key_0\": {\n          \"access\": \"ReadWrite\",\n          \"notify\": true,\n          \"isUnread\": false,\n          \"joinedAt\": 31,\n          \"readUntil\": 6934\n        },\n        \"key_1\": {\n          \"access\": \"ReadWrite\",\n          \"notify\": false,\n          \"isUnread\": false,\n          \"joinedAt\": 670,\n          \"readUntil\": 2891\n        }\n      },\n      \"createdAt\": 2289,\n      \"everyoneReadUntil\": 7610\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3327bbd-084e-48d5-ab90-5914e5d56765",
+              "name": "Missing or invalid authentication token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":userId",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startingAfter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The unique user identifier."
+                    },
+                    {
+                      "description": "Your TalkJS application identifier from the dashboard.",
+                      "type": "any",
+                      "value": "{{appId}}",
+                      "key": "appId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b36c6701-169f-4aba-82ce-9c500b9d139a",
+          "name": "List conversations",
+          "request": {
+            "name": "List conversations",
+            "description": {},
+            "url": {
+              "path": [
+                "conversations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of items to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "startingAfter",
+                  "value": "<string>",
+                  "description": "Pagination cursor; returns items after this id."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your TalkJS application identifier from the dashboard.",
+                  "type": "any",
+                  "value": "{{appId}}",
+                  "key": "appId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "499bcc8c-7327-4e89-8d1e-8639cb3a31d6",
+              "name": "A page of conversations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startingAfter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your TalkJS application identifier from the dashboard.",
+                      "type": "any",
+                      "value": "{{appId}}",
+                      "key": "appId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"subject\": \"string\",\n      \"photoUrl\": \"string\",\n      \"welcomeMessages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"custom\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"topicId\": \"string\",\n      \"lastMessage\": {\n        \"id\": \"string\",\n        \"conversationId\": \"string\",\n        \"senderId\": \"string\",\n        \"type\": \"SystemMessage\",\n        \"origin\": \"email\",\n        \"text\": \"string\",\n        \"attachment\": {},\n        \"location\": [\n          1539.598479070735,\n          8097.300523537928\n        ],\n        \"custom\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        },\n        \"readBy\": [\n          \"string\",\n          \"string\"\n        ],\n        \"referencedMessageId\": \"string\",\n        \"reactions\": {\n          \"key_0\": false\n        },\n        \"createdAt\": 2149,\n        \"editedAt\": 2050\n      },\n      \"participants\": {\n        \"key_0\": {\n          \"access\": \"ReadWrite\",\n          \"notify\": true,\n          \"isUnread\": false,\n          \"joinedAt\": 6085,\n          \"readUntil\": 9415\n        },\n        \"key_1\": {\n          \"access\": \"ReadWrite\",\n          \"notify\": true,\n          \"isUnread\": true,\n          \"joinedAt\": 8802,\n          \"readUntil\": 4196\n        }\n      },\n      \"createdAt\": 8352,\n      \"everyoneReadUntil\": 397\n    },\n    {\n      \"id\": \"string\",\n      \"subject\": \"string\",\n      \"photoUrl\": \"string\",\n      \"welcomeMessages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"custom\": {\n        \"key_0\": \"string\"\n      },\n      \"topicId\": \"string\",\n      \"lastMessage\": {\n        \"id\": \"string\",\n        \"conversationId\": \"string\",\n        \"senderId\": \"string\",\n        \"type\": \"SystemMessage\",\n        \"origin\": \"import\",\n        \"text\": \"string\",\n        \"attachment\": {},\n        \"location\": [\n          9860.87492406969,\n          652.2079455534536\n        ],\n        \"custom\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"readBy\": [\n          \"string\",\n          \"string\"\n        ],\n        \"referencedMessageId\": \"string\",\n        \"reactions\": {\n          \"key_0\": 3966,\n          \"key_1\": true,\n          \"key_2\": 3255\n        },\n        \"createdAt\": 3722,\n        \"editedAt\": 7906\n      },\n      \"participants\": {\n        \"key_0\": {\n          \"access\": \"Read\",\n          \"notify\": true,\n          \"isUnread\": true,\n          \"joinedAt\": 2881,\n          \"readUntil\": 7636\n        }\n      },\n      \"createdAt\": 2381,\n      \"everyoneReadUntil\": 3432\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "234727ae-71b0-4ca7-b7db-c6a4edc3c56f",
+              "name": "Missing or invalid authentication token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startingAfter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your TalkJS application identifier from the dashboard.",
+                      "type": "any",
+                      "value": "{{appId}}",
+                      "key": "appId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "952c5543-5c51-40f0-9dba-48952cca347b",
+          "name": "Retrieve a conversation",
+          "request": {
+            "name": "Retrieve a conversation",
+            "description": {},
+            "url": {
+              "path": [
+                "conversations",
+                ":conversationId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "conversationId",
+                  "description": "(Required) The unique conversation identifier."
+                },
+                {
+                  "description": "Your TalkJS application identifier from the dashboard.",
+                  "type": "any",
+                  "value": "{{appId}}",
+                  "key": "appId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "db784fd3-f319-4ce8-863a-7bce7d94ddf7",
+              "name": "The requested conversation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversationId",
+                      "description": "(Required) The unique conversation identifier."
+                    },
+                    {
+                      "description": "Your TalkJS application identifier from the dashboard.",
+                      "type": "any",
+                      "value": "{{appId}}",
+                      "key": "appId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"subject\": \"string\",\n  \"photoUrl\": \"string\",\n  \"welcomeMessages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"custom\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  },\n  \"topicId\": \"string\",\n  \"lastMessage\": {\n    \"id\": \"string\",\n    \"conversationId\": \"string\",\n    \"senderId\": \"string\",\n    \"type\": \"UserMessage\",\n    \"origin\": \"web\",\n    \"text\": \"string\",\n    \"attachment\": {},\n    \"location\": [\n      5088.251745699992,\n      6501.041998143715\n    ],\n    \"custom\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"readBy\": [\n      \"string\",\n      \"string\"\n    ],\n    \"referencedMessageId\": \"string\",\n    \"reactions\": {\n      \"key_0\": 6293.842601596826\n    },\n    \"createdAt\": 3037,\n    \"editedAt\": 6736\n  },\n  \"participants\": {\n    \"key_0\": {\n      \"access\": \"Read\",\n      \"notify\": false,\n      \"isUnread\": false,\n      \"joinedAt\": 2514,\n      \"readUntil\": 7630\n    },\n    \"key_1\": {\n      \"access\": \"Read\",\n      \"notify\": false,\n      \"isUnread\": false,\n      \"joinedAt\": 5546,\n      \"readUntil\": 458\n    },\n    \"key_2\": {\n      \"access\": \"Read\",\n      \"notify\": false,\n      \"isUnread\": true,\n      \"joinedAt\": 8223,\n      \"readUntil\": 1295\n    }\n  },\n  \"createdAt\": 3555,\n  \"everyoneReadUntil\": 8208\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40ca8c90-b488-48c2-b99b-3efff0ba0341",
+              "name": "Missing or invalid authentication token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversationId",
+                      "description": "(Required) The unique conversation identifier."
+                    },
+                    {
+                      "description": "Your TalkJS application identifier from the dashboard.",
+                      "type": "any",
+                      "value": "{{appId}}",
+                      "key": "appId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "654522bb-4677-4637-84d6-a212bf7591e1",
+              "name": "The requested resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversationId",
+                      "description": "(Required) The unique conversation identifier."
+                    },
+                    {
+                      "description": "Your TalkJS application identifier from the dashboard.",
+                      "type": "any",
+                      "value": "{{appId}}",
+                      "key": "appId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9d35efb7-63ce-4351-9b71-5986f7ef8a20",
+          "name": "Create or update a conversation",
+          "request": {
+            "name": "Create or update a conversation",
+            "description": {},
+            "url": {
+              "path": [
+                "conversations",
+                ":conversationId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "conversationId",
+                  "description": "(Required) The unique conversation identifier."
+                },
+                {
+                  "description": "Your TalkJS application identifier from the dashboard.",
+                  "type": "any",
+                  "value": "{{appId}}",
+                  "key": "appId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subject\": \"<string>\",\n  \"photoUrl\": \"<string>\",\n  \"welcomeMessages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"custom\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"participants\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "285a4bf2-6f6e-4969-9837-879017070ef5",
+              "name": "The conversation was created or updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversationId",
+                      "description": "(Required) The unique conversation identifier."
+                    },
+                    {
+                      "description": "Your TalkJS application identifier from the dashboard.",
+                      "type": "any",
+                      "value": "{{appId}}",
+                      "key": "appId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subject\": \"<string>\",\n  \"photoUrl\": \"<string>\",\n  \"welcomeMessages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"custom\": {\n    \"key_0\": \"<string>\"\n  },\n  \"participants\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"subject\": \"string\",\n  \"photoUrl\": \"string\",\n  \"welcomeMessages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"custom\": {\n    \"key_0\": \"<string>\"\n  },\n  \"topicId\": \"string\",\n  \"lastMessage\": {\n    \"id\": \"string\",\n    \"conversationId\": \"string\",\n    \"senderId\": \"string\",\n    \"type\": \"UserMessage\",\n    \"origin\": \"web\",\n    \"text\": \"string\",\n    \"attachment\": {},\n    \"location\": [\n      5154.784171777304,\n      7509.147339582281\n    ],\n    \"custom\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"readBy\": [\n      \"string\",\n      \"string\"\n    ],\n    \"referencedMessageId\": \"string\",\n    \"reactions\": {\n      \"key_0\": 4111,\n      \"key_1\": true,\n      \"key_2\": \"string\",\n      \"key_3\": false\n    },\n    \"createdAt\": 8158,\n    \"editedAt\": 3232\n  },\n  \"participants\": {\n    \"key_0\": {\n      \"access\": \"ReadWrite\",\n      \"notify\": false,\n      \"isUnread\": false,\n      \"joinedAt\": 7441,\n      \"readUntil\": 2683\n    },\n    \"key_1\": {\n      \"access\": \"Read\",\n      \"notify\": false,\n      \"isUnread\": true,\n      \"joinedAt\": 8761,\n      \"readUntil\": 1862\n    }\n  },\n  \"createdAt\": 655,\n  \"everyoneReadUntil\": 1105\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71b726bb-a824-403c-93da-aabcff81b560",
+              "name": "Missing or invalid authentication token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversationId",
+                      "description": "(Required) The unique conversation identifier."
+                    },
+                    {
+                      "description": "Your TalkJS application identifier from the dashboard.",
+                      "type": "any",
+                      "value": "{{appId}}",
+                      "key": "appId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subject\": \"<string>\",\n  \"photoUrl\": \"<string>\",\n  \"welcomeMessages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"custom\": {\n    \"key_0\": \"<string>\"\n  },\n  \"participants\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc5c89a5-4ed5-4472-881b-b21d32a0ea1a",
+              "name": "Too many requests; the rate limit was exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversationId",
+                      "description": "(Required) The unique conversation identifier."
+                    },
+                    {
+                      "description": "Your TalkJS application identifier from the dashboard.",
+                      "type": "any",
+                      "value": "{{appId}}",
+                      "key": "appId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subject\": \"<string>\",\n  \"photoUrl\": \"<string>\",\n  \"welcomeMessages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"custom\": {\n    \"key_0\": \"<string>\"\n  },\n  \"participants\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "587de829-3599-447e-9051-f0621e7ae21c",
+          "name": "Delete a conversation",
+          "request": {
+            "name": "Delete a conversation",
+            "description": {},
+            "url": {
+              "path": [
+                "conversations",
+                ":conversationId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "conversationId",
+                  "description": "(Required) The unique conversation identifier."
+                },
+                {
+                  "description": "Your TalkJS application identifier from the dashboard.",
+                  "type": "any",
+                  "value": "{{appId}}",
+                  "key": "appId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7baa3281-2196-48c3-ab2e-d56675f924d3",
+              "name": "The conversation was deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversationId",
+                      "description": "(Required) The unique conversation identifier."
+                    },
+                    {
+                      "description": "Your TalkJS application identifier from the dashboard.",
+                      "type": "any",
+                      "value": "{{appId}}",
+                      "key": "appId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b22b1b15-f3c7-4070-8152-76803f260ca7",
+              "name": "Missing or invalid authentication token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversationId",
+                      "description": "(Required) The unique conversation identifier."
+                    },
+                    {
+                      "description": "Your TalkJS application identifier from the dashboard.",
+                      "type": "any",
+                      "value": "{{appId}}",
+                      "key": "appId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3fb2e088-4e0a-427a-a6d6-f70549d8379f",
+              "name": "The requested resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conversations",
+                    ":conversationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversationId",
+                      "description": "(Required) The unique conversation identifier."
+                    },
+                    {
+                      "description": "Your TalkJS application identifier from the dashboard.",
+                      "type": "any",
+                      "value": "{{appId}}",
+                      "key": "appId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4c00f99a-e7b8-427f-9aa1-00da47d8ae11",
+          "name": "Mark a conversation read or unread for a user",
+          "request": {
+            "name": "Mark a conversation read or unread for a user",
+            "description": {},
+            "url": {
+              "path": [
+                "users",
+                ":userId",
+                "conversations",
+                ":conversationId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) The unique user identifier."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "conversationId",
+                  "description": "(Required) The unique conversation identifier."
+                },
+                {
+                  "description": "Your TalkJS application identifier from the dashboard.",
+                  "type": "any",
+                  "value": "{{appId}}",
+                  "key": "appId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"readUntil\": \"<long>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3e784a6c-5d55-470f-acf2-30467bf316d5",
+              "name": "Read state updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":userId",
+                    "conversations",
+                    ":conversationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The unique user identifier."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversationId",
+                      "description": "(Required) The unique conversation identifier."
+                    },
+                    {
+                      "description": "Your TalkJS application identifier from the dashboard.",
+                      "type": "any",
+                      "value": "{{appId}}",
+                      "key": "appId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"readUntil\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "74e3bd5a-8187-4eea-b0a9-15f434d2666c",
+              "name": "Missing or invalid authentication token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":userId",
+                    "conversations",
+                    ":conversationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The unique user identifier."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversationId",
+                      "description": "(Required) The unique conversation identifier."
+                    },
+                    {
+                      "description": "Your TalkJS application identifier from the dashboard.",
+                      "type": "any",
+                      "value": "{{appId}}",
+                      "key": "appId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"readUntil\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your TalkJS application identifier from the dashboard.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "YOUR_APP_ID",
+      "key": "appId"
+    },
+    {
+      "type": "string",
+      "value": "https://api.talkjs.com/v1/{{appId}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f757b71d-4672-44f5-a12b-e94c2cdbd242",
+    "name": "TalkJS REST Conversations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The TalkJS REST API for managing users, conversations, participants, and messages, and for importing existing chat history. All requests are scoped to an application by appId in the path and authenticated with a Bearer token (a server-side secret key or a short-lived JWT with admin claims).\n\nContact Support:\n Name: TalkJS Support",
+      "type": "text/plain"
+    }
+  }
+}
