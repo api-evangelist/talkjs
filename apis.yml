@@ -24,6 +24,12 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/talkjs.png
 tags:
 - Chat
 - Messaging
+- Communications
+- SDK
+- Webhook
+tags_raw:
+- Chat
+- Messaging
 - Communication
 - SDK
 - Webhooks
@@ -34,6 +40,10 @@ apis:
 - aid: talkjs:talkjs-webhooks-api
   name: TalkJS Webhooks API
   tags:
+  - Webhook
+  - Event
+  - Notification
+  tags_raw:
   - Webhooks
   - Events
   - Notifications
@@ -113,6 +123,8 @@ apis:
   humanURL: https://talkjs.com/docs/Reference/REST_API/Users/
   baseURL: https://api.talkjs.com/v1/{appId}
   tags:
+  - Message
+  tags_raw:
   - Messages
   properties:
   - type: OpenAPI
@@ -169,6 +181,8 @@ apis:
   humanURL: https://talkjs.com/docs/Reference/REST_API/Users/
   baseURL: https://api.talkjs.com/v1/{appId}
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
