@@ -7,6 +7,18 @@ description: TalkJS is a chat API and SDK for adding messaging to web and mobile
   Chat UI) with a server-side REST API at https://api.talkjs.com/v1/{appId} for
   managing users, conversations, participants, and messages, importing existing
   chat history, and receiving events via webhooks.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
