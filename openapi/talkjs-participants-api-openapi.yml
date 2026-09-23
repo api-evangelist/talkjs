@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: TalkJS REST Conversations Participants API
+  title: TalkJS REST Participants API
   description: The TalkJS REST API for managing users, conversations, participants, and messages, and for importing existing chat history. All requests are scoped to an application by appId in the path and authenticated with a Bearer token (a server-side secret key or a short-lived JWT with admin claims).
   termsOfService: https://talkjs.com/terms-of-service/
   contact:
@@ -83,6 +83,13 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
     ParticipationInput:
       type: object
       properties:
@@ -97,20 +104,6 @@ components:
           - type: string
             enum:
             - MentionsOnly
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-  responses:
-    Unauthorized:
-      description: Missing or invalid authentication token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     UserId:
       name: userId
@@ -126,6 +119,13 @@ components:
       schema:
         type: string
       description: The unique conversation identifier.
+  responses:
+    Unauthorized:
+      description: Missing or invalid authentication token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

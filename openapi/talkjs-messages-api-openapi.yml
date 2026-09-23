@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: TalkJS REST Conversations Messages API
+  title: TalkJS REST Messages API
   description: The TalkJS REST API for managing users, conversations, participants, and messages, and for importing existing chat history. All requests are scoped to an application by appId in the path and authenticated with a Bearer token (a server-side secret key or a short-lived JWT with admin claims).
   termsOfService: https://talkjs.com/terms-of-service/
   contact:
@@ -144,14 +144,43 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    StartingAfter:
+      name: startingAfter
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Pagination cursor; returns items after this id.
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Maximum number of items to return per page.
+    UserId:
+      name: userId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique user identifier.
+    MessageId:
+      name: messageId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique message identifier.
+    ConversationId:
+      name: conversationId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique conversation identifier.
   schemas:
-    MessageList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Message'
     Error:
       type: object
       properties:
@@ -159,63 +188,13 @@ components:
           type: string
         message:
           type: string
-    Custom:
-      type: object
-      additionalProperties:
-        type: string
-      description: Custom key-value metadata (string values).
-    Message:
+    MessageList:
       type: object
       properties:
-        id:
-          type: string
-        conversationId:
-          type: string
-        senderId:
-          type: string
-          nullable: true
-        type:
-          type: string
-          enum:
-          - UserMessage
-          - SystemMessage
-        origin:
-          type: string
-          enum:
-          - rest
-          - email
-          - import
-          - web
-        text:
-          type: string
-          nullable: true
-        attachment:
-          type: object
-          nullable: true
-        location:
+        data:
           type: array
           items:
-            type: number
-          nullable: true
-        custom:
-          $ref: '#/components/schemas/Custom'
-        readBy:
-          type: array
-          items:
-            type: string
-        referencedMessageId:
-          type: string
-          nullable: true
-        reactions:
-          type: object
-          additionalProperties: true
-        createdAt:
-          type: integer
-          format: int64
-        editedAt:
-          type: integer
-          format: int64
-          nullable: true
+            $ref: '#/components/schemas/Message'
     SendMessageInput:
       type: object
       required:
@@ -238,22 +217,86 @@ components:
           type: string
           description: Sender user id; required for UserMessage, omitted for SystemMessage.
         referencedMessageId:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         custom:
           $ref: '#/components/schemas/Custom'
         idempotencyKey:
           type: string
           description: Ensures exactly-once delivery for 24 hours.
+    Custom:
+      type: object
+      additionalProperties:
+        type: string
+      description: Custom key-value metadata (string values).
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+        conversationId:
+          type: string
+        senderId:
+          type:
+          - string
+          - 'null'
+        type:
+          type: string
+          enum:
+          - UserMessage
+          - SystemMessage
+        origin:
+          type: string
+          enum:
+          - rest
+          - email
+          - import
+          - web
+        text:
+          type:
+          - string
+          - 'null'
+        attachment:
+          type:
+          - object
+          - 'null'
+        location:
+          type:
+          - array
+          - 'null'
+          items:
+            type: number
+        custom:
+          $ref: '#/components/schemas/Custom'
+        readBy:
+          type: array
+          items:
+            type: string
+        referencedMessageId:
+          type:
+          - string
+          - 'null'
+        reactions:
+          type: object
+          additionalProperties: true
+        createdAt:
+          type: integer
+          format: int64
+        editedAt:
+          type:
+          - integer
+          - 'null'
+          format: int64
   responses:
-    NotFound:
-      description: The requested resource does not exist.
+    RateLimited:
+      description: Too many requests; the rate limit was exceeded.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Too many requests; the rate limit was exceeded.
+    NotFound:
+      description: The requested resource does not exist.
       content:
         application/json:
           schema:
@@ -264,42 +307,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    MessageId:
-      name: messageId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique message identifier.
-    UserId:
-      name: userId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique user identifier.
-    StartingAfter:
-      name: startingAfter
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Pagination cursor; returns items after this id.
-    Limit:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-      description: Maximum number of items to return per page.
-    ConversationId:
-      name: conversationId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique conversation identifier.
   securitySchemes:
     bearerAuth:
       type: http

@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: TalkJS REST Conversations Import API
+  title: TalkJS REST Import API
   description: The TalkJS REST API for managing users, conversations, participants, and messages, and for importing existing chat history. All requests are scoped to an application by appId in the path and authenticated with a Bearer token (a server-side secret key or a short-lived JWT with admin claims).
   termsOfService: https://talkjs.com/terms-of-service/
   contact:
@@ -68,19 +68,6 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   schemas:
-    ImportMessageInput:
-      allOf:
-      - $ref: '#/components/schemas/SendMessageInput'
-      - type: object
-        properties:
-          createdAt:
-            type: integer
-            format: int64
-            description: Original Unix timestamp in milliseconds to preserve.
-          readBy:
-            type: array
-            items:
-              type: string
     Error:
       type: object
       properties:
@@ -88,11 +75,6 @@ components:
           type: string
         message:
           type: string
-    Custom:
-      type: object
-      additionalProperties:
-        type: string
-      description: Custom key-value metadata (string values).
     SendMessageInput:
       type: object
       required:
@@ -115,13 +97,32 @@ components:
           type: string
           description: Sender user id; required for UserMessage, omitted for SystemMessage.
         referencedMessageId:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         custom:
           $ref: '#/components/schemas/Custom'
         idempotencyKey:
           type: string
           description: Ensures exactly-once delivery for 24 hours.
+    Custom:
+      type: object
+      additionalProperties:
+        type: string
+      description: Custom key-value metadata (string values).
+    ImportMessageInput:
+      allOf:
+      - $ref: '#/components/schemas/SendMessageInput'
+      - type: object
+        properties:
+          createdAt:
+            type: integer
+            format: int64
+            description: Original Unix timestamp in milliseconds to preserve.
+          readBy:
+            type: array
+            items:
+              type: string
   responses:
     RateLimited:
       description: Too many requests; the rate limit was exceeded.

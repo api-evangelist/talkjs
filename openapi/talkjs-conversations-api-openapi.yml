@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: TalkJS REST Conversations API
   description: The TalkJS REST API for managing users, conversations, participants, and messages, and for importing existing chat history. All requests are scoped to an application by appId in the path and authenticated with a Bearer token (a server-side secret key or a short-lived JWT with admin claims).
@@ -142,55 +142,53 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    StartingAfter:
+      name: startingAfter
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Pagination cursor; returns items after this id.
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Maximum number of items to return per page.
+    UserId:
+      name: userId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique user identifier.
+    ConversationId:
+      name: conversationId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique conversation identifier.
   schemas:
-    Conversation:
-      type: object
-      properties:
-        id:
-          type: string
-        subject:
-          type: string
-          nullable: true
-        photoUrl:
-          type: string
-          nullable: true
-        welcomeMessages:
-          type: array
-          items:
-            type: string
-          nullable: true
-        custom:
-          $ref: '#/components/schemas/Custom'
-        topicId:
-          type: string
-          nullable: true
-        lastMessage:
-          $ref: '#/components/schemas/Message'
-        participants:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/Participant'
-        createdAt:
-          type: integer
-          format: int64
-        everyoneReadUntil:
-          type: integer
-          format: int64
-          nullable: true
     ConversationInput:
       type: object
       properties:
         subject:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         photoUrl:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         welcomeMessages:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
         custom:
           $ref: '#/components/schemas/Custom'
         participants:
@@ -205,18 +203,45 @@ components:
           type: string
         message:
           type: string
-    ConversationList:
+    Conversation:
       type: object
       properties:
-        data:
-          type: array
+        id:
+          type: string
+        subject:
+          type:
+          - string
+          - 'null'
+        photoUrl:
+          type:
+          - string
+          - 'null'
+        welcomeMessages:
+          type:
+          - array
+          - 'null'
           items:
-            $ref: '#/components/schemas/Conversation'
-    Custom:
-      type: object
-      additionalProperties:
-        type: string
-      description: Custom key-value metadata (string values).
+            type: string
+        custom:
+          $ref: '#/components/schemas/Custom'
+        topicId:
+          type:
+          - string
+          - 'null'
+        lastMessage:
+          $ref: '#/components/schemas/Message'
+        participants:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Participant'
+        createdAt:
+          type: integer
+          format: int64
+        everyoneReadUntil:
+          type:
+          - integer
+          - 'null'
+          format: int64
     Message:
       type: object
       properties:
@@ -225,8 +250,9 @@ components:
         conversationId:
           type: string
         senderId:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         type:
           type: string
           enum:
@@ -240,16 +266,19 @@ components:
           - import
           - web
         text:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         attachment:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
         location:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: number
-          nullable: true
         custom:
           $ref: '#/components/schemas/Custom'
         readBy:
@@ -257,8 +286,9 @@ components:
           items:
             type: string
         referencedMessageId:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         reactions:
           type: object
           additionalProperties: true
@@ -266,9 +296,22 @@ components:
           type: integer
           format: int64
         editedAt:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int64
-          nullable: true
+    Custom:
+      type: object
+      additionalProperties:
+        type: string
+      description: Custom key-value metadata (string values).
+    ConversationList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Conversation'
     Participant:
       type: object
       properties:
@@ -289,12 +332,13 @@ components:
           type: integer
           format: int64
         readUntil:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int64
-          nullable: true
   responses:
-    NotFound:
-      description: The requested resource does not exist.
+    Unauthorized:
+      description: Missing or invalid authentication token.
       content:
         application/json:
           schema:
@@ -305,41 +349,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid authentication token.
+    NotFound:
+      description: The requested resource does not exist.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    StartingAfter:
-      name: startingAfter
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Pagination cursor; returns items after this id.
-    UserId:
-      name: userId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique user identifier.
-    Limit:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-      description: Maximum number of items to return per page.
-    ConversationId:
-      name: conversationId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique conversation identifier.
   securitySchemes:
     bearerAuth:
       type: http
