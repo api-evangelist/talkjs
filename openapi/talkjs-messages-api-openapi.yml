@@ -144,57 +144,26 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    StartingAfter:
-      name: startingAfter
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Pagination cursor; returns items after this id.
-    Limit:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-      description: Maximum number of items to return per page.
-    UserId:
-      name: userId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique user identifier.
-    MessageId:
-      name: messageId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique message identifier.
-    ConversationId:
-      name: conversationId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique conversation identifier.
+  responses:
+    NotFound:
+      description: The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid authentication token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Too many requests; the rate limit was exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-    MessageList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Message'
     SendMessageInput:
       type: object
       required:
@@ -225,11 +194,6 @@ components:
         idempotencyKey:
           type: string
           description: Ensures exactly-once delivery for 24 hours.
-    Custom:
-      type: object
-      additionalProperties:
-        type: string
-      description: Custom key-value metadata (string values).
     Message:
       type: object
       properties:
@@ -288,25 +252,61 @@ components:
           - integer
           - 'null'
           format: int64
-  responses:
-    RateLimited:
-      description: Too many requests; the rate limit was exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid authentication token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    MessageList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+    Custom:
+      type: object
+      additionalProperties:
+        type: string
+      description: Custom key-value metadata (string values).
+  parameters:
+    ConversationId:
+      name: conversationId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique conversation identifier.
+    UserId:
+      name: userId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique user identifier.
+    MessageId:
+      name: messageId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique message identifier.
+    StartingAfter:
+      name: startingAfter
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Pagination cursor; returns items after this id.
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Maximum number of items to return per page.
   securitySchemes:
     bearerAuth:
       type: http
