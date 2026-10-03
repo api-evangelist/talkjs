@@ -156,77 +156,40 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    StartingAfter:
+      name: startingAfter
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Pagination cursor; returns items after this id.
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Maximum number of items to return per page.
+    UserId:
+      name: userId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique user identifier.
   schemas:
-    Participant:
-      type: object
-      properties:
-        access:
-          type: string
-          enum:
-          - ReadWrite
-          - Read
-        notify:
-          oneOf:
-          - type: boolean
-          - type: string
-            enum:
-            - MentionsOnly
-        isUnread:
-          type: boolean
-        joinedAt:
-          type: integer
-          format: int64
-        readUntil:
-          type:
-          - integer
-          - 'null'
-          format: int64
-    UserInput:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        email:
-          type:
-          - array
-          - 'null'
-          items:
+    User:
+      allOf:
+      - $ref: '#/components/schemas/UserInput'
+      - type: object
+        properties:
+          id:
             type: string
-        phone:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        photoUrl:
-          type:
-          - string
-          - 'null'
-        role:
-          type:
-          - string
-          - 'null'
-        welcomeMessage:
-          type:
-          - string
-          - 'null'
-        availabilityText:
-          type:
-          - string
-          - 'null'
-        locale:
-          type:
-          - string
-          - 'null'
-        custom:
-          $ref: '#/components/schemas/Custom'
-        pushTokens:
-          type:
-          - object
-          - 'null'
-          additionalProperties: true
+          createdAt:
+            type: integer
+            format: int64
+            description: Unix timestamp in milliseconds.
     Message:
       type: object
       properties:
@@ -285,43 +248,6 @@ components:
           - integer
           - 'null'
           format: int64
-    User:
-      allOf:
-      - $ref: '#/components/schemas/UserInput'
-      - type: object
-        properties:
-          id:
-            type: string
-          createdAt:
-            type: integer
-            format: int64
-            description: Unix timestamp in milliseconds.
-    ConversationList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Conversation'
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-    Custom:
-      type: object
-      additionalProperties:
-        type: string
-      description: Custom key-value metadata (string values).
-    UserList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/User'
     Presence:
       type: object
       properties:
@@ -335,6 +261,52 @@ components:
           enum:
           - online
           - offline
+    UserInput:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        email:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        phone:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        photoUrl:
+          type:
+          - string
+          - 'null'
+        role:
+          type:
+          - string
+          - 'null'
+        welcomeMessage:
+          type:
+          - string
+          - 'null'
+        availabilityText:
+          type:
+          - string
+          - 'null'
+        locale:
+          type:
+          - string
+          - 'null'
+        custom:
+          $ref: '#/components/schemas/Custom'
+        pushTokens:
+          type:
+          - object
+          - 'null'
+          additionalProperties: true
     Conversation:
       type: object
       properties:
@@ -374,15 +346,59 @@ components:
           - integer
           - 'null'
           format: int64
+    ConversationList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Conversation'
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+    UserList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+    Custom:
+      type: object
+      additionalProperties:
+        type: string
+      description: Custom key-value metadata (string values).
+    Participant:
+      type: object
+      properties:
+        access:
+          type: string
+          enum:
+          - ReadWrite
+          - Read
+        notify:
+          oneOf:
+          - type: boolean
+          - type: string
+            enum:
+            - MentionsOnly
+        isUnread:
+          type: boolean
+        joinedAt:
+          type: integer
+          format: int64
+        readUntil:
+          type:
+          - integer
+          - 'null'
+          format: int64
   responses:
     Unauthorized:
       description: Missing or invalid authentication token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Too many requests; the rate limit was exceeded.
       content:
         application/json:
           schema:
@@ -393,28 +409,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    Limit:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-      description: Maximum number of items to return per page.
-    UserId:
-      name: userId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique user identifier.
-    StartingAfter:
-      name: startingAfter
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Pagination cursor; returns items after this id.
+    RateLimited:
+      description: Too many requests; the rate limit was exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

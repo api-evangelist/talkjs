@@ -144,56 +144,43 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    NotFound:
-      description: The requested resource does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid authentication token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Too many requests; the rate limit was exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    MessageId:
+      name: messageId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique message identifier.
+    StartingAfter:
+      name: startingAfter
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Pagination cursor; returns items after this id.
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Maximum number of items to return per page.
+    UserId:
+      name: userId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique user identifier.
+    ConversationId:
+      name: conversationId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique conversation identifier.
   schemas:
-    SendMessageInput:
-      type: object
-      required:
-      - type
-      properties:
-        type:
-          type: string
-          enum:
-          - UserMessage
-          - SystemMessage
-        text:
-          type: string
-          description: The message text. Mutually exclusive with content.
-        content:
-          type: array
-          items:
-            type: object
-          description: Rich content blocks. Mutually exclusive with text.
-        sender:
-          type: string
-          description: Sender user id; required for UserMessage, omitted for SystemMessage.
-        referencedMessageId:
-          type:
-          - string
-          - 'null'
-        custom:
-          $ref: '#/components/schemas/Custom'
-        idempotencyKey:
-          type: string
-          description: Ensures exactly-once delivery for 24 hours.
     Message:
       type: object
       properties:
@@ -252,13 +239,36 @@ components:
           - integer
           - 'null'
           format: int64
-    MessageList:
+    SendMessageInput:
       type: object
+      required:
+      - type
       properties:
-        data:
+        type:
+          type: string
+          enum:
+          - UserMessage
+          - SystemMessage
+        text:
+          type: string
+          description: The message text. Mutually exclusive with content.
+        content:
           type: array
           items:
-            $ref: '#/components/schemas/Message'
+            type: object
+          description: Rich content blocks. Mutually exclusive with text.
+        sender:
+          type: string
+          description: Sender user id; required for UserMessage, omitted for SystemMessage.
+        referencedMessageId:
+          type:
+          - string
+          - 'null'
+        custom:
+          $ref: '#/components/schemas/Custom'
+        idempotencyKey:
+          type: string
+          description: Ensures exactly-once delivery for 24 hours.
     Error:
       type: object
       properties:
@@ -271,42 +281,32 @@ components:
       additionalProperties:
         type: string
       description: Custom key-value metadata (string values).
-  parameters:
-    ConversationId:
-      name: conversationId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique conversation identifier.
-    UserId:
-      name: userId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique user identifier.
-    MessageId:
-      name: messageId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique message identifier.
-    StartingAfter:
-      name: startingAfter
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Pagination cursor; returns items after this id.
-    Limit:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-      description: Maximum number of items to return per page.
+    MessageList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+  responses:
+    NotFound:
+      description: The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid authentication token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Too many requests; the rate limit was exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

@@ -98,18 +98,6 @@ components:
         idempotencyKey:
           type: string
           description: Ensures exactly-once delivery for 24 hours.
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-    Custom:
-      type: object
-      additionalProperties:
-        type: string
-      description: Custom key-value metadata (string values).
     ImportMessageInput:
       allOf:
       - $ref: '#/components/schemas/SendMessageInput'
@@ -123,6 +111,18 @@ components:
             type: array
             items:
               type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+    Custom:
+      type: object
+      additionalProperties:
+        type: string
+      description: Custom key-value metadata (string values).
   responses:
     Unauthorized:
       description: Missing or invalid authentication token.
