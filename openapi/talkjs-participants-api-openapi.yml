@@ -82,6 +82,28 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid authentication token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    ConversationId:
+      name: conversationId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique conversation identifier.
+    UserId:
+      name: userId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique user identifier.
   schemas:
     Error:
       type: object
@@ -104,28 +126,6 @@ components:
           - type: string
             enum:
             - MentionsOnly
-  responses:
-    Unauthorized:
-      description: Missing or invalid authentication token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    UserId:
-      name: userId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique user identifier.
-    ConversationId:
-      name: conversationId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique conversation identifier.
   securitySchemes:
     bearerAuth:
       type: http

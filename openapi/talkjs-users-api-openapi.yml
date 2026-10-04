@@ -190,64 +190,13 @@ components:
             type: integer
             format: int64
             description: Unix timestamp in milliseconds.
-    Message:
+    ConversationList:
       type: object
       properties:
-        id:
-          type: string
-        conversationId:
-          type: string
-        senderId:
-          type:
-          - string
-          - 'null'
-        type:
-          type: string
-          enum:
-          - UserMessage
-          - SystemMessage
-        origin:
-          type: string
-          enum:
-          - rest
-          - email
-          - import
-          - web
-        text:
-          type:
-          - string
-          - 'null'
-        attachment:
-          type:
-          - object
-          - 'null'
-        location:
-          type:
-          - array
-          - 'null'
-          items:
-            type: number
-        custom:
-          $ref: '#/components/schemas/Custom'
-        readBy:
+        data:
           type: array
           items:
-            type: string
-        referencedMessageId:
-          type:
-          - string
-          - 'null'
-        reactions:
-          type: object
-          additionalProperties: true
-        createdAt:
-          type: integer
-          format: int64
-        editedAt:
-          type:
-          - integer
-          - 'null'
-          format: int64
+            $ref: '#/components/schemas/Conversation'
     Presence:
       type: object
       properties:
@@ -307,6 +256,30 @@ components:
           - object
           - 'null'
           additionalProperties: true
+    Participant:
+      type: object
+      properties:
+        access:
+          type: string
+          enum:
+          - ReadWrite
+          - Read
+        notify:
+          oneOf:
+          - type: boolean
+          - type: string
+            enum:
+            - MentionsOnly
+        isUnread:
+          type: boolean
+        joinedAt:
+          type: integer
+          format: int64
+        readUntil:
+          type:
+          - integer
+          - 'null'
+          format: int64
     Conversation:
       type: object
       properties:
@@ -346,13 +319,64 @@ components:
           - integer
           - 'null'
           format: int64
-    ConversationList:
+    Message:
       type: object
       properties:
-        data:
+        id:
+          type: string
+        conversationId:
+          type: string
+        senderId:
+          type:
+          - string
+          - 'null'
+        type:
+          type: string
+          enum:
+          - UserMessage
+          - SystemMessage
+        origin:
+          type: string
+          enum:
+          - rest
+          - email
+          - import
+          - web
+        text:
+          type:
+          - string
+          - 'null'
+        attachment:
+          type:
+          - object
+          - 'null'
+        location:
+          type:
+          - array
+          - 'null'
+          items:
+            type: number
+        custom:
+          $ref: '#/components/schemas/Custom'
+        readBy:
           type: array
           items:
-            $ref: '#/components/schemas/Conversation'
+            type: string
+        referencedMessageId:
+          type:
+          - string
+          - 'null'
+        reactions:
+          type: object
+          additionalProperties: true
+        createdAt:
+          type: integer
+          format: int64
+        editedAt:
+          type:
+          - integer
+          - 'null'
+          format: int64
     Error:
       type: object
       properties:
@@ -360,6 +384,11 @@ components:
           type: string
         message:
           type: string
+    Custom:
+      type: object
+      additionalProperties:
+        type: string
+      description: Custom key-value metadata (string values).
     UserList:
       type: object
       properties:
@@ -367,35 +396,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/User'
-    Custom:
-      type: object
-      additionalProperties:
-        type: string
-      description: Custom key-value metadata (string values).
-    Participant:
-      type: object
-      properties:
-        access:
-          type: string
-          enum:
-          - ReadWrite
-          - Read
-        notify:
-          oneOf:
-          - type: boolean
-          - type: string
-            enum:
-            - MentionsOnly
-        isUnread:
-          type: boolean
-        joinedAt:
-          type: integer
-          format: int64
-        readUntil:
-          type:
-          - integer
-          - 'null'
-          format: int64
   responses:
     Unauthorized:
       description: Missing or invalid authentication token.
@@ -403,14 +403,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource does not exist.
+    RateLimited:
+      description: Too many requests; the rate limit was exceeded.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Too many requests; the rate limit was exceeded.
+    NotFound:
+      description: The requested resource does not exist.
       content:
         application/json:
           schema:

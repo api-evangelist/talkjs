@@ -159,6 +159,13 @@ components:
       schema:
         type: string
       description: Pagination cursor; returns items after this id.
+    ConversationId:
+      name: conversationId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique conversation identifier.
     Limit:
       name: limit
       in: query
@@ -173,14 +180,63 @@ components:
       schema:
         type: string
       description: The unique user identifier.
-    ConversationId:
-      name: conversationId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique conversation identifier.
+  responses:
+    Unauthorized:
+      description: Missing or invalid authentication token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Too many requests; the rate limit was exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    SendMessageInput:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          type: string
+          enum:
+          - UserMessage
+          - SystemMessage
+        text:
+          type: string
+          description: The message text. Mutually exclusive with content.
+        content:
+          type: array
+          items:
+            type: object
+          description: Rich content blocks. Mutually exclusive with text.
+        sender:
+          type: string
+          description: Sender user id; required for UserMessage, omitted for SystemMessage.
+        referencedMessageId:
+          type:
+          - string
+          - 'null'
+        custom:
+          $ref: '#/components/schemas/Custom'
+        idempotencyKey:
+          type: string
+          description: Ensures exactly-once delivery for 24 hours.
+    MessageList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
     Message:
       type: object
       properties:
@@ -239,36 +295,6 @@ components:
           - integer
           - 'null'
           format: int64
-    SendMessageInput:
-      type: object
-      required:
-      - type
-      properties:
-        type:
-          type: string
-          enum:
-          - UserMessage
-          - SystemMessage
-        text:
-          type: string
-          description: The message text. Mutually exclusive with content.
-        content:
-          type: array
-          items:
-            type: object
-          description: Rich content blocks. Mutually exclusive with text.
-        sender:
-          type: string
-          description: Sender user id; required for UserMessage, omitted for SystemMessage.
-        referencedMessageId:
-          type:
-          - string
-          - 'null'
-        custom:
-          $ref: '#/components/schemas/Custom'
-        idempotencyKey:
-          type: string
-          description: Ensures exactly-once delivery for 24 hours.
     Error:
       type: object
       properties:
@@ -281,32 +307,6 @@ components:
       additionalProperties:
         type: string
       description: Custom key-value metadata (string values).
-    MessageList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Message'
-  responses:
-    NotFound:
-      description: The requested resource does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid authentication token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Too many requests; the rate limit was exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
