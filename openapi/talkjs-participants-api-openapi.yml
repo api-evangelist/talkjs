@@ -90,13 +90,6 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   parameters:
-    ConversationId:
-      name: conversationId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique conversation identifier.
     UserId:
       name: userId
       in: path
@@ -104,6 +97,13 @@ components:
       schema:
         type: string
       description: The unique user identifier.
+    ConversationId:
+      name: conversationId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique conversation identifier.
   schemas:
     Error:
       type: object

@@ -156,60 +156,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    StartingAfter:
-      name: startingAfter
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Pagination cursor; returns items after this id.
-    Limit:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-      description: Maximum number of items to return per page.
-    UserId:
-      name: userId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique user identifier.
   schemas:
-    User:
-      allOf:
-      - $ref: '#/components/schemas/UserInput'
-      - type: object
-        properties:
-          id:
-            type: string
-          createdAt:
-            type: integer
-            format: int64
-            description: Unix timestamp in milliseconds.
-    ConversationList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Conversation'
-    Presence:
-      type: object
-      properties:
-        visible:
-          type: boolean
-        lastChanged:
-          type: integer
-          format: int64
-        availability:
-          type: string
-          enum:
-          - online
-          - offline
     UserInput:
       type: object
       required:
@@ -256,30 +203,6 @@ components:
           - object
           - 'null'
           additionalProperties: true
-    Participant:
-      type: object
-      properties:
-        access:
-          type: string
-          enum:
-          - ReadWrite
-          - Read
-        notify:
-          oneOf:
-          - type: boolean
-          - type: string
-            enum:
-            - MentionsOnly
-        isUnread:
-          type: boolean
-        joinedAt:
-          type: integer
-          format: int64
-        readUntil:
-          type:
-          - integer
-          - 'null'
-          format: int64
     Conversation:
       type: object
       properties:
@@ -315,6 +238,30 @@ components:
           type: integer
           format: int64
         everyoneReadUntil:
+          type:
+          - integer
+          - 'null'
+          format: int64
+    Participant:
+      type: object
+      properties:
+        access:
+          type: string
+          enum:
+          - ReadWrite
+          - Read
+        notify:
+          oneOf:
+          - type: boolean
+          - type: string
+            enum:
+            - MentionsOnly
+        isUnread:
+          type: boolean
+        joinedAt:
+          type: integer
+          format: int64
+        readUntil:
           type:
           - integer
           - 'null'
@@ -377,6 +324,24 @@ components:
           - integer
           - 'null'
           format: int64
+    ConversationList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Conversation'
+    User:
+      allOf:
+      - $ref: '#/components/schemas/UserInput'
+      - type: object
+        properties:
+          id:
+            type: string
+          createdAt:
+            type: integer
+            format: int64
+            description: Unix timestamp in milliseconds.
     Error:
       type: object
       properties:
@@ -384,11 +349,19 @@ components:
           type: string
         message:
           type: string
-    Custom:
+    Presence:
       type: object
-      additionalProperties:
-        type: string
-      description: Custom key-value metadata (string values).
+      properties:
+        visible:
+          type: boolean
+        lastChanged:
+          type: integer
+          format: int64
+        availability:
+          type: string
+          enum:
+          - online
+          - offline
     UserList:
       type: object
       properties:
@@ -396,6 +369,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/User'
+    Custom:
+      type: object
+      additionalProperties:
+        type: string
+      description: Custom key-value metadata (string values).
   responses:
     Unauthorized:
       description: Missing or invalid authentication token.
@@ -415,6 +393,28 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    UserId:
+      name: userId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique user identifier.
+    StartingAfter:
+      name: startingAfter
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Pagination cursor; returns items after this id.
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Maximum number of items to return per page.
   securitySchemes:
     bearerAuth:
       type: http

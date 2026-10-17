@@ -142,110 +142,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Missing or invalid authentication token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Too many requests; the rate limit was exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    StartingAfter:
-      name: startingAfter
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Pagination cursor; returns items after this id.
-    ConversationId:
-      name: conversationId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique conversation identifier.
-    Limit:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-      description: Maximum number of items to return per page.
-    UserId:
-      name: userId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique user identifier.
   schemas:
-    ConversationList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Conversation'
-    Participant:
-      type: object
-      properties:
-        access:
-          type: string
-          enum:
-          - ReadWrite
-          - Read
-        notify:
-          oneOf:
-          - type: boolean
-          - type: string
-            enum:
-            - MentionsOnly
-        isUnread:
-          type: boolean
-        joinedAt:
-          type: integer
-          format: int64
-        readUntil:
-          type:
-          - integer
-          - 'null'
-          format: int64
-    ConversationInput:
-      type: object
-      properties:
-        subject:
-          type:
-          - string
-          - 'null'
-        photoUrl:
-          type:
-          - string
-          - 'null'
-        welcomeMessages:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        custom:
-          $ref: '#/components/schemas/Custom'
-        participants:
-          type: array
-          items:
-            type: string
-          description: User ids to add as participants.
     Conversation:
       type: object
       properties:
@@ -281,6 +178,30 @@ components:
           type: integer
           format: int64
         everyoneReadUntil:
+          type:
+          - integer
+          - 'null'
+          format: int64
+    Participant:
+      type: object
+      properties:
+        access:
+          type: string
+          enum:
+          - ReadWrite
+          - Read
+        notify:
+          oneOf:
+          - type: boolean
+          - type: string
+            enum:
+            - MentionsOnly
+        isUnread:
+          type: boolean
+        joinedAt:
+          type: integer
+          format: int64
+        readUntil:
           type:
           - integer
           - 'null'
@@ -343,6 +264,13 @@ components:
           - integer
           - 'null'
           format: int64
+    ConversationList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Conversation'
     Error:
       type: object
       properties:
@@ -350,11 +278,83 @@ components:
           type: string
         message:
           type: string
+    ConversationInput:
+      type: object
+      properties:
+        subject:
+          type:
+          - string
+          - 'null'
+        photoUrl:
+          type:
+          - string
+          - 'null'
+        welcomeMessages:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        custom:
+          $ref: '#/components/schemas/Custom'
+        participants:
+          type: array
+          items:
+            type: string
+          description: User ids to add as participants.
     Custom:
       type: object
       additionalProperties:
         type: string
       description: Custom key-value metadata (string values).
+  responses:
+    Unauthorized:
+      description: Missing or invalid authentication token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Too many requests; the rate limit was exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    UserId:
+      name: userId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique user identifier.
+    ConversationId:
+      name: conversationId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique conversation identifier.
+    StartingAfter:
+      name: startingAfter
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Pagination cursor; returns items after this id.
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Maximum number of items to return per page.
   securitySchemes:
     bearerAuth:
       type: http

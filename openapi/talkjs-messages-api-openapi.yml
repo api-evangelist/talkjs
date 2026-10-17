@@ -144,42 +144,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    MessageId:
-      name: messageId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique message identifier.
-    StartingAfter:
-      name: startingAfter
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Pagination cursor; returns items after this id.
-    ConversationId:
-      name: conversationId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique conversation identifier.
-    Limit:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-      description: Maximum number of items to return per page.
-    UserId:
-      name: userId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The unique user identifier.
   responses:
     Unauthorized:
       description: Missing or invalid authentication token.
@@ -230,13 +194,6 @@ components:
         idempotencyKey:
           type: string
           description: Ensures exactly-once delivery for 24 hours.
-    MessageList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Message'
     Message:
       type: object
       properties:
@@ -295,6 +252,13 @@ components:
           - integer
           - 'null'
           format: int64
+    MessageList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
     Error:
       type: object
       properties:
@@ -307,6 +271,42 @@ components:
       additionalProperties:
         type: string
       description: Custom key-value metadata (string values).
+  parameters:
+    UserId:
+      name: userId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique user identifier.
+    MessageId:
+      name: messageId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique message identifier.
+    ConversationId:
+      name: conversationId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique conversation identifier.
+    StartingAfter:
+      name: startingAfter
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Pagination cursor; returns items after this id.
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Maximum number of items to return per page.
   securitySchemes:
     bearerAuth:
       type: http
