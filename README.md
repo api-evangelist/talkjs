@@ -1,4 +1,4 @@
-# TalkJS (talkjs)
+# TalkJS
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,137 +66,127 @@
 
 TalkJS is a chat API and SDK for adding messaging to web and mobile apps. It pairs a customizable pre-built chat UI (the TalkJS JavaScript SDK and Chat UI) with a server-side REST API at https://api.talkjs.com/v1/{appId} for managing users, conversations, participants, and messages, importing existing chat history, and receiving events via webhooks.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/talkjs/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/talkjs/refs/heads/main/apis.yml)
+**Areas:** Chat · Messaging · Communications · SDK · Webhook
 
-## Tags
+## TalkJS on APIs.io
 
-- Chat
-- Messaging
-- Communication
-- SDK
-- Webhooks
+Everything profiled for TalkJS is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/talkjs/](https://apis.io/providers/talkjs/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (6)
 
-- **Created:** 2026-06-20
-- **Modified:** 2026-06-20
+- [TalkJS Webhooks API](https://apis.io/apis/talkjs/talkjs-webhooks-api/) — Server-to-server event delivery for message.sent, message.read, message.updated, message.deleted, user.created/updated, conversation.deleted, and…
+- [TalkJS Conversations API](https://apis.io/apis/talkjs/talkjs-conversations-api/) — Create, update, list, and delete conversations.
+- [TalkJS Import API](https://apis.io/apis/talkjs/talkjs-import-api/) — Import messages with original timestamps.
+- [TalkJS Messages API](https://apis.io/apis/talkjs/talkjs-messages-api/) — Send, list, fetch, edit, delete messages, and manage reactions.
+- [TalkJS Participants API](https://apis.io/apis/talkjs/talkjs-participants-api/) — Add, update, and remove conversation participants.
+- [TalkJS Users API](https://apis.io/apis/talkjs/talkjs-users-api/) — Create, update, retrieve, and list users; manage presence.
 
-## APIs
+### Published properties
 
-### TalkJS Users API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Create, update, and retrieve TalkJS users, list users and a user's conversations, and manage per-user presence. Users are timeless resources upserted with PUT and updated PATCH-style with a subset of fields.
+#### Agentic access (1)
 
-- **Human URL:** [https://talkjs.com/docs/Reference/REST_API/Users/](https://talkjs.com/docs/Reference/REST_API/Users/)
-- **Base URL:** `https://api.talkjs.com/v1/{appId}`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Talkjs Agentic Access](https://apis.io/agentic-access/talkjs/talkjs-agentic-access/)
 
-- Users
-- Presence
-- Profiles
+#### Collections (6)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://talkjs.com/docs/Reference/REST_API/Users/)
-- [API Reference](https://talkjs.com/docs/Reference/REST_API/Users/)
-- [OpenAPI](openapi/talkjs-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/talkjs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/talkjs.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [TalkJS REST API](https://apis.io/collections/talkjs/open-talkjs/)
+- [TalkJS REST Conversations API](https://apis.io/collections/talkjs/open-talkjs-conversations-api/)
+- [TalkJS REST Conversations Import API](https://apis.io/collections/talkjs/open-talkjs-import-api/)
+- [TalkJS REST Conversations Messages API](https://apis.io/collections/talkjs/open-talkjs-messages-api/)
+- [TalkJS REST Conversations Participants API](https://apis.io/collections/talkjs/open-talkjs-participants-api/)
+- [TalkJS REST Conversations Users API](https://apis.io/collections/talkjs/open-talkjs-users-api/)
 
-### TalkJS Conversations & Participants API
+#### Security (4)
 
-Create, update, list, and delete conversations, and manage their participants — join (PUT), leave (DELETE), and set access (ReadWrite/Read) and notification preferences. Includes marking conversations read/unread per user.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://talkjs.com/docs/Reference/REST_API/Conversations/](https://talkjs.com/docs/Reference/REST_API/Conversations/)
-- **Base URL:** `https://api.talkjs.com/v1/{appId}`
+- [Talkjs Authentication](https://apis.io/security/talkjs/talkjs-authentication/)
+- [Talkjs Domain Security](https://apis.io/security/talkjs/talkjs-domain-security/)
+- [Talkjs Trust Center](https://apis.io/security/talkjs/talkjs-trust-center/)
+- [Talkjs Vulnerability Disclosure](https://apis.io/security/talkjs/talkjs-vulnerability-disclosure/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Conversations
-- Participants
-- Access
+Published plans, tiers and prices.
 
-#### Properties
+- [Talkjs Plans Pricing](https://apis.io/plans/talkjs/talkjs-plans-pricing/)
 
-- [Documentation](https://talkjs.com/docs/Reference/REST_API/Conversations/)
-- [API Reference](https://talkjs.com/docs/Reference/REST_API/Conversations/)
-- [OpenAPI](openapi/talkjs-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/talkjs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/talkjs.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Rate limits (1)
 
-### TalkJS Messages API
+Published request limits.
 
-Send, list, fetch, edit, and delete messages in a conversation, including UserMessage and SystemMessage types, replies via referencedMessageId, idempotency keys, and emoji reactions.
+- [Talkjs Rate Limits](https://apis.io/rate-limits/talkjs/talkjs-rate-limits/)
 
-- **Human URL:** [https://talkjs.com/docs/Reference/REST_API/Messages/](https://talkjs.com/docs/Reference/REST_API/Messages/)
-- **Base URL:** `https://api.talkjs.com/v1/{appId}`
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- Messages
-- Reactions
-- Replies
+- [Talkjs Finops](https://apis.io/finops/talkjs/talkjs-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://talkjs.com/docs/Reference/REST_API/Messages/)
-- [API Reference](https://talkjs.com/docs/Reference/REST_API/Messages/)
-- [OpenAPI](openapi/talkjs-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/talkjs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/talkjs.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### TalkJS Import API
-
-Import existing chat history with original timestamps via the special importing resource, used after upserting users and conversations to migrate from other chat providers into TalkJS.
-
-- **Human URL:** [https://talkjs.com/docs/Reference/REST_API/Importing_Messages/](https://talkjs.com/docs/Reference/REST_API/Importing_Messages/)
-- **Base URL:** `https://api.talkjs.com/v1/{appId}`
-
-#### Tags
-
-- Import
-- Migration
-- History
-
-#### Properties
-
-- [Documentation](https://talkjs.com/docs/Reference/REST_API/Importing_Messages/)
-- [API Reference](https://talkjs.com/docs/Reference/REST_API/Importing_Messages/)
-- [OpenAPI](openapi/talkjs-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/talkjs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/talkjs.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### TalkJS Webhooks API
-
-Server-to-server event delivery for message.sent, message.read, message.updated, message.deleted, user.created/updated, conversation.deleted, and notification lifecycle events, posted as JSON with an id/type/createdAt/data envelope to your configured endpoints.
-
-- **Human URL:** [https://talkjs.com/docs/Reference/Webhooks/](https://talkjs.com/docs/Reference/Webhooks/)
-- **Base URL:** `https://api.talkjs.com/v1/{appId}`
-
-#### Tags
-
-- Webhooks
-- Events
-- Notifications
-
-#### Properties
-
-- [Documentation](https://talkjs.com/docs/Reference/Webhooks/)
-- [API Reference](https://talkjs.com/docs/Reference/Webhooks/)
-- [Review](review.yml)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/talkjs)
-- [LinkedIn](https://www.linkedin.com/company/talkjs)
 - [Website](https://talkjs.com)
 - [Documentation](https://talkjs.com/docs/)
-- [Plans](plans/talkjs-plans-pricing.yml)
-- [Rate Limits](rate-limits/talkjs-rate-limits.yml)
-- [Fin Ops](finops/talkjs-finops.yml)
+- [Blog](https://talkjs.com/resources/rss/)
+- [GitHub](https://github.com/talkjs)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 33.4** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 48.4 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 32.1 |
+| Access clarity | 15.8 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 22.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/talkjs/](https://apis.io/providers/talkjs/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for TalkJS: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/talkjs/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
